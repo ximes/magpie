@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: magpie_production
-  username: magpie
-  password: <%= ENV['MAGPIE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
