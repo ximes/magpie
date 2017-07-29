@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "rails_helper"
 
 RSpec.describe Jobs::Status do
-  xit 'has a status'
-  xit 'has a date'
-  xit 'belongs to a result'
+  xit "has a status"
+  xit "has a date"
+  xit "belongs to a result"
 end

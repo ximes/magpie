@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "rails_helper"
 
 RSpec.configure do
   def default_for(key, default)
@@ -11,8 +11,8 @@ end
 
 RSpec.describe Magpie::Configuration do
   let(:config) { described_class.new }
-  
-  context 'has options with defaults' do
+
+  context "has options with defaults" do
     default_for :storage, :default
     default_for :track_job_results, false
     default_for :track_job_status, false
