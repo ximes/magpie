@@ -30,8 +30,14 @@ group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "rspec-rails", "~> 3.5"
 end
+group :test do
+  gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "shoulda-matchers", git: "https://github.com/thoughtbot/shoulda-matchers.git", branch: "rails-5"
+end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
