@@ -6,9 +6,23 @@ RSpec.describe Job do
     it { expect(subject).to validate_presence_of(:start_date) }
     it { expect(subject).to respond_to(:end_date) }
     it { expect(subject).to validate_presence_of(:url) }
-    # TODO xit { expect(subject).to be_a_valid_url(:url) }
     it { expect(subject).to respond_to(:enabled?) }
+
+    let (:job) { build(:job) }
+
+    it "accepts valid url" do
+      job.url = "http://www.google.com"
+      expect(job).to be_valid(:url)
+    end
+
+    ["www.google.com" , "noturl//url"].each do |url|
+      it "refuses invalid url" do
+        job.url = url
+        expect(job).not_to be_valid(:url)
+      end
+    end
   end
+
   describe "ActiveModel associations" do
     it { expect(subject).to have_many(:steps).dependent(:destroy)  }
     it { expect(subject).to have_many(:actions).through(:steps) }
