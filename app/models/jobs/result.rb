@@ -1,4 +1,6 @@
 class Jobs::Result < ApplicationRecord
+  has_paper_trail
+
   validates :job, presence: true
 
   belongs_to :job

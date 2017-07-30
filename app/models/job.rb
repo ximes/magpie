@@ -8,4 +8,8 @@ class Job < ApplicationRecord
   has_many :actions, through: :steps
 
   has_one :result, class_name: "Jobs::Result", dependent: :destroy
+
+  def results
+    result.versions
+  end
 end
