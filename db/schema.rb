@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729205732) do
+ActiveRecord::Schema.define(version: 20170729230920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.string "name"
+    t.boolean "enabled"
+    t.string "class_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.string "name"
@@ -25,4 +33,48 @@ ActiveRecord::Schema.define(version: 20170729205732) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "jobs_actions", force: :cascade do |t|
+    t.bigint "step_id"
+    t.bigint "action_id"
+    t.text "return_block"
+    t.boolean "enabled"
+    t.integer "order", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_id"], name: "index_jobs_actions_on_action_id"
+    t.index ["step_id"], name: "index_jobs_actions_on_step_id"
+  end
+
+  create_table "jobs_rules", force: :cascade do |t|
+    t.bigint "step_id"
+    t.bigint "rule_id"
+    t.text "return_block"
+    t.boolean "enabled"
+    t.integer "order", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rule_id"], name: "index_jobs_rules_on_rule_id"
+    t.index ["step_id"], name: "index_jobs_rules_on_step_id"
+  end
+
+  create_table "rules", force: :cascade do |t|
+    t.string "name"
+    t.boolean "enabled"
+    t.string "class_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.bigint "job_id"
+    t.integer "order", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_steps_on_job_id"
+  end
+
+  add_foreign_key "jobs_actions", "actions"
+  add_foreign_key "jobs_actions", "steps"
+  add_foreign_key "jobs_rules", "rules"
+  add_foreign_key "jobs_rules", "steps"
 end

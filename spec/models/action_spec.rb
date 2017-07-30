@@ -1,6 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Action do
+  describe "ActiveModel validations" do
+    it { expect(subject).to validate_presence_of(:name) }
+    it { expect(subject).to validate_presence_of(:class_name) }
+    it { expect(subject).to respond_to(:enabled?) }
+  end
+  describe "ActiveModel associations" do
+    it { expect(subject).to have_many(:jobs_actions) }
+  end
+
   xit "can click"
   xit "can fill form"
   xit "can follow link"

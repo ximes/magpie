@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Rule do
+  describe "ActiveModel validations" do
+    it { expect(subject).to validate_presence_of(:name) }
+    it { expect(subject).to validate_presence_of(:class_name) }
+    it { expect(subject).to respond_to(:enabled?) }
+  end
+  describe "ActiveModel associations" do
+    it { expect(subject).to have_many(:jobs_rules) }
+  end
   context "when using a css selector" do
     xit "can match a class"
     xit "can match an id"
