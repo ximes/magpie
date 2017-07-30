@@ -12,8 +12,12 @@ end
 gem "bootstrap-sass", "~> 3.3.6"
 # Authentication
 gem "devise", "~> 4.3.0"
+# Use env vars
+gem "dotenv-rails", groups: [:development, :test]
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
+# Used by devise per authentication
+gem "omniauth-facebook", "~> 4.0.0"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 0.21.0"
 # Use Puma as the app server
