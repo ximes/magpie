@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Jobs::Rule do
+RSpec.describe Jobs::Rule, type: :model  do
   describe "ActiveModel validations" do
     it { expect(subject).to validate_numericality_of(:order) }
   end

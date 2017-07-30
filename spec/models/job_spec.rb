@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Job do
+RSpec.describe Job, type: :model  do
   describe "ActiveModel validations" do
     it { expect(subject).to validate_presence_of(:name) }
     it { expect(subject).to validate_presence_of(:start_date) }
@@ -30,7 +30,8 @@ RSpec.describe Job do
 
     xit { expect(subject).to have_one(:result).through(:results) }
     xit { expect(subject).to have_one(:status).through(:result) }
-    xit { expect(subject).to have_one(:results).dependent(:destroy) }
+    it { expect(subject).to have_one(:results).dependent(:destroy) }
+    it { expect(subject).to have_one(:result) }
     # TODO test for accepts_nested_attributes_for
   end
 

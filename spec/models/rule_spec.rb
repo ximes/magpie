@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Rule do
+RSpec.describe Rule, type: :model  do
   describe "ActiveModel validations" do
     it { expect(subject).to validate_presence_of(:name) }
     it { expect(subject).to validate_presence_of(:class_name) }

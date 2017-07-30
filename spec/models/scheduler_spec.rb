@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Jobs::Scheduler do
+RSpec.describe Jobs::Scheduler, type: :model  do
   xit "can run it now"
   xit "can run it at"
   xit "can set a recurrent"
