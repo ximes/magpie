@@ -9,6 +9,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# For url validation
+gem "validate_url", "~> 1.0.2"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
 # Use Puma as the app server
