@@ -1,5 +1,5 @@
 module Jobs
   def self.table_name_prefix
-    'jobs_'
+    "jobs_"
   end
 end
