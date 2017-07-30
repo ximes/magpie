@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170730121333) do
   end
 
   create_table "jobs_actions", force: :cascade do |t|
-    t.bigint "step_id"
+    t.bigint "jobs_steps_id"
     t.bigint "action_id"
     t.text "return_block"
     t.boolean "enabled"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170730121333) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["action_id"], name: "index_jobs_actions_on_action_id"
-    t.index ["step_id"], name: "index_jobs_actions_on_step_id"
+    t.index ["jobs_steps_id"], name: "index_jobs_actions_on_jobs_steps_id"
   end
 
   create_table "jobs_results", force: :cascade do |t|
@@ -54,15 +54,23 @@ ActiveRecord::Schema.define(version: 20170730121333) do
   end
 
   create_table "jobs_rules", force: :cascade do |t|
-    t.bigint "step_id"
+    t.bigint "jobs_steps_id"
     t.bigint "rule_id"
     t.text "return_block"
     t.boolean "enabled"
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["jobs_steps_id"], name: "index_jobs_rules_on_jobs_steps_id"
     t.index ["rule_id"], name: "index_jobs_rules_on_rule_id"
-    t.index ["step_id"], name: "index_jobs_rules_on_step_id"
+  end
+
+  create_table "jobs_steps", force: :cascade do |t|
+    t.bigint "job_id"
+    t.integer "order", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_jobs_steps_on_job_id"
   end
 
   create_table "rules", force: :cascade do |t|
@@ -73,17 +81,9 @@ ActiveRecord::Schema.define(version: 20170730121333) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "steps", force: :cascade do |t|
-    t.bigint "job_id"
-    t.integer "order", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_steps_on_job_id"
-  end
-
   add_foreign_key "jobs_actions", "actions"
-  add_foreign_key "jobs_actions", "steps"
+  add_foreign_key "jobs_actions", "jobs_steps", column: "jobs_steps_id"
   add_foreign_key "jobs_results", "jobs"
+  add_foreign_key "jobs_rules", "jobs_steps", column: "jobs_steps_id"
   add_foreign_key "jobs_rules", "rules"
-  add_foreign_key "jobs_rules", "steps"
 end
