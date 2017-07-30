@@ -9,6 +9,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "bootstrap-sass", "~> 3.3.6"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
 # Use postgresql as the database for Active Record
@@ -16,11 +17,11 @@ gem "pg", "~> 0.21.0"
 # Use Puma as the app server
 gem "puma", "~> 3.7"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'bootstrap-sass', '~> 3.3.6'
 gem "rails", "~> 5.1.2"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
-
+# Use for versioning model attributes
+gem "paper_trail"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
