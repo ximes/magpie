@@ -10,6 +10,8 @@ git_source(:github) do |repo_name|
 end
 
 gem "bootstrap-sass", "~> 3.3.6"
+# Authentication
+gem "devise", "~> 4.3.0"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
 # Use postgresql as the database for Active Record
