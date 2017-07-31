@@ -9,6 +9,8 @@ class Job < ApplicationRecord
 
   has_one :result, class_name: "Jobs::Result", dependent: :destroy
 
+  belongs_to :user
+
   def results
     result.versions
   end

@@ -29,6 +29,7 @@ RSpec.describe Job, type: :model  do
     it { expect(subject).to have_many(:rules).through(:steps) }
     it { expect(subject).to have_one(:result).dependent(:destroy) }
     it { expect(subject).to respond_to(:results) }
+    it { expect(subject).to belong_to(:user) }
     xit { expect(subject).to have_one(:status).through(:result) }
     # TODO test for accepts_nested_attributes_for
   end
