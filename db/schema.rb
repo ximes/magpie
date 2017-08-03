@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731172720) do
+ActiveRecord::Schema.define(version: 20170731174643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20170731172720) do
     t.string "class_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.string "track_job_results"
+    t.string "track_job_status"
+    t.string "job_method"
+    t.string "preliminary_header_check"
+    t.string "job_notification"
+    t.string "job_notification_method"
+    t.string "configurable_type"
+    t.bigint "configurable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["configurable_type", "configurable_id"], name: "index_configurations_on_configurable_type_and_configurable_id"
   end
 
   create_table "jobs", force: :cascade do |t|
