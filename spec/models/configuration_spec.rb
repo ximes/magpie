@@ -9,37 +9,48 @@ RSpec.configure do
   end
 end
 
+def default_options
+  {
+    track_job_results: false,
+    track_job_status: false,
+    job_method: :realtime,
+    preliminary_header_check: false,
+    job_notification: false,
+    job_notification_method: :log
+  }
+end
+
 RSpec.describe Configuration, type: :model  do
+
   context "has options with defaults" do
-    default_for :track_job_results, false
-    default_for :track_job_status, false
-    default_for :job_method, :realtime
-    default_for :preliminary_header_check, false
-    default_for :job_notification, false
-    default_for :job_notification_method, :log
+    default_options.each do |option, value|
+      default_for option, value
+    end
   end
 
   describe "ActiveModel associations" do
     it { expect(subject).to belong_to(:configurable) }
   end
 
-  describe "when default" do
+  describe "when belongs to a user" do
     let(:user) { FactoryGirl.create(:user) }
-    let(:configuration) { user.create_configuration attributes_for(:configuration) }
+    let(:default_configuration) { FactoryGirl.build(:configuration) }
 
-    it "belongs to a user" do
-      expect(configuration).to respond_to(:configurable)
-      expect(configuration.configurable).to match user
+    it "loads default values" do
+      default_options.each do |option, value|
+        expect(user.configuration.send(option)).to eq value
+      end
     end
   end
 
-  describe "when overridable" do
+  describe "when belongs to a job" do
     let(:job) { FactoryGirl.create(:valid_job) }
-    let(:configuration) { job.create_configuration attributes_for(:configuration) }
+    let(:job_configuration) { FactoryGirl.build(:job_configuration) }
 
-    it "belongs to a job" do
-      expect(configuration).to respond_to(:configurable)
-      expect(configuration.configurable).to eq job
+    it "is overridable" do
+      default_options.each do |option, value|
+        expect(job.configuration.send(option)).to eq value
+      end
     end
   end
 
@@ -52,14 +63,14 @@ RSpec.describe Configuration, type: :model  do
       job.job_method = :new_value
 
       expect(job.job_method).to eq :new_value
-      expect(job.job_notification_method).to eq "log"
+      expect(job.job_notification_method).to eq :log
     end
 
     it "it can call configuration options through configuration object" do
       job.configuration.job_method = :new_value
 
       expect(job.configuration.job_method).to eq :new_value
-      expect(job.configuration.job_notification_method).to eq "log"
+      expect(job.configuration.job_notification_method).to eq :log
     end
   end
 end

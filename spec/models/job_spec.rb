@@ -35,8 +35,13 @@ RSpec.describe Job, type: :model  do
     # TODO test for accepts_nested_attributes_for
   end
 
+  describe "when initializing" do
+    it "it should create a new config object" do
+      expect(subject.configuration).not_to be_nil
+    end
+  end
+
   # xit 'has a notification_channel' TODO
-  # xit 'has a user' TODO
   # xit 'has a base_url_type (protected, unprotected)'
   # xit 'has a auth_credentials (protected, unprotected)' TODO
 
