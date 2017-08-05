@@ -11,9 +11,13 @@ class Job < ApplicationRecord
 
   include Configurable
 
-  belongs_to :user
+  belongs_to :user, required: true
 
   def results
     result.versions
+  end
+
+  def configuration
+    (customizable? && super) || (user && user.configuration)
   end
 end

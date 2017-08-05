@@ -1,5 +1,5 @@
 class Configuration < ApplicationRecord
-  belongs_to :configurable, polymorphic: true
+  belongs_to :configurable, polymorphic: true, required: false, inverse_of: :configuration
 
   # Track results : true | false
   attribute :track_job_results, :boolean, default: false

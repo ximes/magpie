@@ -34,43 +34,22 @@ RSpec.describe Configuration, type: :model  do
 
   describe "when belongs to a user" do
     let(:user) { FactoryGirl.create(:user) }
-    let(:default_configuration) { FactoryGirl.build(:configuration) }
+
+    before do
+      user.build_configuration
+    end
 
     it "loads default values" do
       default_options.each do |option, value|
         expect(user.configuration.send(option)).to eq value
       end
     end
-  end
-
-  describe "when belongs to a job" do
-    let(:job) { FactoryGirl.create(:valid_job) }
-    let(:job_configuration) { FactoryGirl.build(:job_configuration) }
-
-    it "is overridable" do
-      default_options.each do |option, value|
-        expect(job.configuration.send(option)).to eq value
-      end
-    end
-  end
-
-  describe "when overriding user configuration" do
-    let(:default_configuration) { FactoryGirl.create(:configuration) }
-    let(:configuration) { FactoryGirl.create(:job_configuration) }
-    let(:job) { configuration.configurable }
-
-    it "it can call configuration options directly" do
-      job.job_method = :new_value
-
-      expect(job.job_method).to eq :new_value
-      expect(job.job_notification_method).to eq :log
-    end
 
     it "it can call configuration options through configuration object" do
-      job.configuration.job_method = :new_value
+      user.configuration.job_method = :new_value
 
-      expect(job.configuration.job_method).to eq :new_value
-      expect(job.configuration.job_notification_method).to eq :log
+      expect(user.configuration.job_method).to eq :new_value
+      expect(user.configuration.job_notification_method).to eq :log
     end
   end
 end

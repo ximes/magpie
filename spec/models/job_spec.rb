@@ -35,9 +35,33 @@ RSpec.describe Job, type: :model  do
     # TODO test for accepts_nested_attributes_for
   end
 
-  describe "when initializing" do
-    it "it should create a new config object" do
-      expect(subject.configuration).not_to be_nil
+  describe "when it does have its own configuration" do
+    before do
+      subject.customizable = true
+      subject.build_configuration
+    end
+
+    it "it gets default configuration options" do
+      expect(subject.configuration.job_notification_method).to eq :log
+    end
+
+    it "it get default configuration options" do
+      subject.configuration.job_notification_method = :new_value
+      expect(subject.configuration.job_notification_method).to eq :new_value
+    end
+  end
+
+  describe "when it doesn't have its own configuration" do
+    let!(:user) { FactoryGirl.build(:user_configuration).configurable }
+
+    before do
+      subject.customizable = false
+      subject.user = user
+      subject.user.configuration.job_method = :new_value
+    end
+
+    it "it can call configuration options through configuration object" do
+      expect(subject.configuration.job_method).to eq user.configuration.job_method
     end
   end
 
