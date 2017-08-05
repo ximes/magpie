@@ -10,6 +10,8 @@ git_source(:github) do |repo_name|
 end
 
 gem "bootstrap-sass", "~> 3.3.6"
+# Tree/Graph node parsing
+gem "closure_tree", "~>  6.6.0"
 # Nested forms
 gem "cocoon", "~> 1.2.10"
 # Authentication

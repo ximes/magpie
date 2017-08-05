@@ -1,6 +1,3 @@
-class Action < ApplicationRecord
-  validates :name, presence: true
-  validates :class_name, presence: true
-
-  has_many :jobs_actions, class_name: "Jobs::Action"
+class Action < Atom
+  has_many :jobs_actions, class_name: "Jobs::Action", foreign_key: "atom_id"
 end

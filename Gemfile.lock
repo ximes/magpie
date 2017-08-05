@@ -58,6 +58,9 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    closure_tree (6.6.0)
+      activerecord (>= 4.1.0)
+      with_advisory_lock (>= 3.0.0)
     cocoon (1.2.10)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
@@ -258,6 +261,9 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    with_advisory_lock (3.1.0)
+      activerecord (>= 3.2)
+      thread_safe
 
 PLATFORMS
   ruby
@@ -265,6 +271,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
+  closure_tree (~> 6.6.0)
   cocoon (~> 1.2.10)
   database_cleaner
   devise (~> 4.3.0)
