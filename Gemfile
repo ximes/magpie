@@ -14,12 +14,20 @@ gem "bootstrap-sass", "~> 3.3.6"
 gem "closure_tree", "~>  6.6.0"
 # Nested forms
 gem "cocoon", "~> 1.2.10"
+# Javascript libs
+gem "coffee-rails", "~> 4.2.2"
 # Authentication
 gem "devise", "~> 4.3.0"
 # Use env vars
 gem "dotenv-rails", groups: [:development, :test]
+# Font awesome
+gem "font-awesome-sass", "~> 4.7.0"
+# Template
+gem "gentelella-rails", "~> 0.1.8"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
+# Javascript libs
+gem "jquery-rails", "~> 4.3.1"
 # Used by devise per authentication
 gem "omniauth-facebook", "~> 4.0.0"
 # Use postgresql as the database for Active Record
