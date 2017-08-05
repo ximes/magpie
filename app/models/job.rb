@@ -18,6 +18,6 @@ class Job < ApplicationRecord
   end
 
   def configuration
-    (customizable? && super) || (user && user.configuration)
+    customizable? ? super : build_configuration(user.configuration.accessible_attributes)
   end
 end

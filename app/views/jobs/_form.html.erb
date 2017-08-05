@@ -1,17 +1,26 @@
-<%= form_with(model: job, local: true) do |form| %>
-  <% if job.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+<%= simple_form_for(@job) do |f| %>
+  <%= f.error_notification %>
+  
+  <%= f.association :user, as: :hidden %>
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :url %>
+    <%= f.input :enabled %>
+  </div>
 
-      <ul>
-      <% job.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <h3>Configuration</h3>
+  <%= f.input :customizable %>
+  
+  <div class="form-actions" id="custom-configuration">
+    <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
+      <%= render 'shared/configuration_fields', f: configuration %>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

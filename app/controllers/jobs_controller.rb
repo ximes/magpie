@@ -14,7 +14,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @job = Job.new(user: current_user)
   end
 
   # GET /jobs/1/edit
@@ -25,12 +25,12 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
-
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: @job }
       else
+        #raise @job.errors.inspect
         format.html { render :new }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
@@ -69,6 +69,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.fetch(:job, {})
+      params.fetch(:job, {}).permit(:name, :enabled, :start_date, :end_date, :url, :customizable, :user_id, configuration_attributes: [:id, :job_method, :track_job_results, :track_job_status, :preliminary_header_check, :job_notification, :job_notification_method])
     end
 end
