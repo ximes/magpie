@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805181942) do
+ActiveRecord::Schema.define(version: 20170805200735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "atom_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "atom_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "atom_desc_idx"
+  end
 
   create_table "atoms", force: :cascade do |t|
     t.string "name"
@@ -21,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170805181942) do
     t.string "class_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
   end
 
   create_table "configurations", force: :cascade do |t|
