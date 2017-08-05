@@ -10,6 +10,8 @@ git_source(:github) do |repo_name|
 end
 
 gem "bootstrap-sass", "~> 3.3.6"
+# Nested forms
+gem "cocoon", "~> 1.2.10"
 # Authentication
 gem "devise", "~> 4.3.0"
 # Use env vars
@@ -30,6 +32,8 @@ gem "rails", "~> 5.1.2"
 gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# Form helpers
+gem "simple_form", "~> 3.5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # For url validation
