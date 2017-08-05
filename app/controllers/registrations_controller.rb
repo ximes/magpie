@@ -1,6 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-  layout "homepage"
-
   protected
 
     def update_resource(resource, params)
