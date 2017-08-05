@@ -1,16 +1,48 @@
-<div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <p class="notice">
-      <%= notice %>
-    </p>
-    <p class="alert">
-      <%= alert %>
-    </p>
-    <div class="cover-container">
-      <div class="inner cover">
-        <h1 class="cover-heading">Magpie!</h1>
-        <p class="lead"><%= image_tag "magpie_logo.png", class: "logo img-circle" %></p>
+<div class="container">
+  <div class="jumbotron">
+    <div class="row section">
+      <div class="col-md-5 col-xs-12 ">
+        <%= image_tag "magpie_logo.png", class: "logo img-circle img-fluid rounded-circle", height:"256", width:"256"  %>
       </div>
+      <div class="col-md-7 col-xs-12">
+        <h1>Magpie brings all the crumbs to you.</h1>
+        <p class="lead text-muted">Scrape, submit and analyze data, in a snap of fingers.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row section">
+    <div class="col-md-7">
+      <h2>Drag, Drop, and Schedule it.</h2>
+      <p class="lead">
+        Select you Context, Rules and Actions. Set a recurring or a scheduled Time. Specify the information you'd like to collect.</p>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag "43-256.png", class: "logo img-circle img-fluid rounded-circle", height:"256", width:"256"  %>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="row section">
+    <div class="col-md-7 col-md-push-5">
+      <h2>Grab a coffee.</h2>
+      <p class="lead">Sit down, grab a cup, relax and wait for your results to be handled, submitted or versioned.</p>
+    </div>
+    <div class="col-md-5 col-md-pull-7">
+      <%= image_tag "Coffecup.png", class: "logo img-circle img-fluid rounded-circle", height:"128", width:"128"  %>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="row section">
+    <div class="col-md-7">
+      <h2>Collect & analyze the trends. <span class="text-muted"></span></h2>
+      <p class="lead">View your results, see them organized in nifty graphs.</p>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag "21-256.png", class: "logo img-circle img-fluid rounded-circle", height:"200", width:"200"  %>
     </div>
   </div>
 </div>

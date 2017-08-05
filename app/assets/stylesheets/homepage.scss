@@ -14,7 +14,7 @@
 a,
 a:focus,
 a:hover {
-  color: #65FFF0;
+  color: #004499;
 }
 
 /* Custom default button */
@@ -106,4 +106,19 @@ body {
 }
 .nav-item form{
   margin-top: 12px;
+}
+
+/* Refined styles */
+.jumbotron{
+  background-color: transparent;
+}
+h2{
+  font-size: 250%;
+}
+.lead{
+  font-size:200%;
+}
+.section{
+  padding-top: 2em;
+  padding-bottom: 1em;
 }

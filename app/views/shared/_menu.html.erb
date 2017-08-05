@@ -7,29 +7,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Magpie!</a>
+      <a class="navbar-brand" href="/">Magpie</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to('Jobs', jobs_path, class: "nav-link") %>
+            <%= link_to("#{icon("tasks")} Jobs".html_safe, jobs_path, class: "nav-link") %>
           </li>
           <li class="nav-item">
-            <%= button_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+            <%= link_to("#{icon("sign-out")} Sign out".html_safe, destroy_user_session_path, method: :delete, class: "nav-link") %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= button_to('Login', new_user_session_path, class: "nav-link")  %>
+            <%= link_to("#{icon("sign-in")} Sign in".html_safe, new_user_session_path, class: "nav-link")  %>
           </li>
         <% end %>
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to('Edit profile', edit_user_registration_path, class: "nav-link") %>
+            <%= link_to("#{icon("user-o")} Edit profile".html_safe, edit_user_registration_path, class: "nav-link") %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to('Register', new_user_registration_path, class: "nav-link")  %>
+            <%= link_to("#{icon("user-circle-o")} Register".html_safe, new_user_registration_path, class: "nav-link")  %>
           </li>
         <% end %>
       </ul>

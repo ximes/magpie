@@ -9,6 +9,15 @@
 
   <body>
     <%= render partial: "shared/menu" %>
-    <%= yield %>
+    <div class="site-wrapper">
+      <%= render partial: "shared/flashes" %>
+      <%= yield %>
+    </div>
+
+    <footer>
+      <p>&copy; Magpie 2017</p>
+    </footer>
+
+    <%= javascript_include_tag 'homepage' %>
   </body>
 </html>
