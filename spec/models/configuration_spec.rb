@@ -26,6 +26,9 @@ RSpec.describe Configuration, type: :model  do
     default_options.each do |option, value|
       default_for option, value
     end
+    it "returns right attributes for comparisons" do
+      expect(subject.accessible_attributes).to eq default_options
+    end
   end
 
   describe "ActiveModel associations" do
