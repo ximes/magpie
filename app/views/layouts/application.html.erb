@@ -7,30 +7,43 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 
-<body>
-    <!-- Static navbar -->
-  <%= render partial: "shared/menu" %>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="notice">
-          <%= notice %>
-        </p>
-        <p class="alert">
-          <%= alert %>
-        </p>
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="<%= root_path %>" class="site_title">
+              <%= image_tag "magpie_logo_48x48.png", class: "logo img-circle img-fluid rounded-circle", height:"48", width:"48"  %>
+             <span>Magpie</span>
+             </a>
+          </div>
+
+          <div class="clearfix"></div>
+  
+          <%= render partial: "shared/sidebar" %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
+
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <%= render partial: "shared/menu" %>
+          </nav>
+        </div>
+      </div>
+
+      <div class="right_col" role="main">
+        <%= render partial: "shared/flashes" %>
         <%= yield %>
       </div>
     </div>
-    <footer>
-      <p>&copy; Company 2017</p>
-    </footer>
-
   </div>
+
+  <%= render partial: "shared/footer" %>
   
   <%= javascript_include_tag 'application' %>
 </body>
