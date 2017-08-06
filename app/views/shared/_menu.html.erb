@@ -1,20 +1,18 @@
-<ul class="nav navbar-nav">
+<ul class="nav navbar-nav pull-right">
   <% if user_signed_in? %>
-    <li class="nav-item">
-      <%= link_to("#{icon("sign-out")} Sign out".html_safe, destroy_user_session_path, method: :delete, class: "nav-link") %>
+    <li>
+      <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <img src="images/img.jpg" alt="">Welcome, <%= current_user.to_s %>
+        <span class=" fa fa-angle-down"></span>
+      </a>
+      <ul class="dropdown-menu dropdown-usermenu pull-right">
+        <li><%= link_to("#{icon("user-o")} Edit profile".html_safe, edit_user_registration_path, class: "nav-link") %></li>
+        <li><%= link_to("#{icon("sign-out")} Sign out".html_safe, destroy_user_session_path, method: :delete, class: "nav-link") %></li>
+      </ul>
     </li>
   <% else %>
-    <li class="nav-item">
-      <%= link_to("#{icon("sign-in")} Sign in".html_safe, new_user_session_path, class: "nav-link")  %>
-    </li>
-  <% end %>
-  <% if user_signed_in? %>
-    <li class="nav-item">
-      <%= link_to("#{icon("user-o")} Edit profile".html_safe, edit_user_registration_path, class: "nav-link") %>
-    </li>
-  <% else %>
-    <li class="nav-item">
-      <%= link_to("#{icon("user-circle-o")} Register".html_safe, new_user_registration_path, class: "nav-link")  %>
-    </li>
+    <li><%= link_to("#{icon("sign-in")} Sign in".html_safe, new_user_session_path, class: "nav-link")  %></li>
+    <li><%= link_to("#{icon("user-circle-o")} Register".html_safe, new_user_registration_path, class: "nav-link")  %></li>
   <% end %>
 </ul>
+

@@ -1,6 +1,15 @@
-<h1>Editing Job</h1>
+<div class="page-title">
+  <div class="title_left">
+    <h3>Editing Job</h3>
+  </div>
+
+  <div class="title_right">
+    <div class="col-xs-12 form-group top_search">
+        <%= link_to 'Back', jobs_path, class: "btn btn-default pull-right" %>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
 
 <%= render 'form', job: @job %>
-
-<%= link_to 'Show', @job %> |
-<%= link_to 'Back', jobs_path %>

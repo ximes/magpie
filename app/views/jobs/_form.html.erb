@@ -1,26 +1,51 @@
 <%= simple_form_for(@job) do |f| %>
   <%= f.error_notification %>
-  
-  <%= f.association :user, as: :hidden %>
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :url %>
-    <%= f.input :enabled %>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Details</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <%= f.association :user, as: :hidden %>
+        <div class="form-inputs">
+          <%= f.input :name %>
+          <%= f.input :url %>
+          <%= f.input :enabled %>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-  <h3>Configuration</h3>
-  <%= f.input :customizable %>
-  
-  <div class="form-actions" id="custom-configuration">
-    <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
-      <%= render 'shared/configuration_fields', f: configuration %>
-    <% end %>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Schedule</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-inputs">
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Configuration</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <%= f.input :customizable %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+        <div class="form-actions" id="custom-configuration">
+          <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
+            <%= render 'shared/configuration_fields', f: configuration %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+  <%= f.button :submit, class: 'btn btn-primary pull-right' %>
 <% end %>

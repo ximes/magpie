@@ -7,11 +7,6 @@ class JobsController < ApplicationController
     @jobs = Job.all
   end
 
-  # GET /jobs/1
-  # GET /jobs/1.json
-  def show
-  end
-
   # GET /jobs/new
   def new
     @job = Job.new(user: current_user)
@@ -27,8 +22,8 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: "Job was successfully created." }
-        format.json { render :show, status: :created, location: @job }
+        format.html { redirect_to jobs_path, notice: "Job was successfully created." }
+        format.json { render :show, status: :created, location: jobs_path }
       else
         #raise @job.errors.inspect
         format.html { render :new }
@@ -42,8 +37,8 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: "Job was successfully updated." }
-        format.json { render :show, status: :ok, location: @job }
+        format.html { redirect_to jobs_path, notice: "Job was successfully updated." }
+        format.json { render :show, status: :ok, location: jobs_path }
       else
         format.html { render :edit }
         format.json { render json: @job.errors, status: :unprocessable_entity }

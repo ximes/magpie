@@ -1,32 +1,60 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="page-title">
+  <div class="title_left">
+    <h3>Editing <%= resource_name.to_s.humanize %></h3>
+  </div>
+
+  <div class="title_right">
+    <div class="col-xs-12 form-group top_search">
+        <%= link_to 'Back', jobs_path, class: "btn btn-default pull-right" %>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Details</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
+          <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+          <%= f.input :password_confirmation, required: false %>
+
+          <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <h3>Configuration</h3>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Configuration</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-actions" id="custom-configuration">
+          <%= f.fields_for :configuration do |configuration| %>
+            <%= render 'shared/configuration_fields', f: configuration %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="form-actions">
-    <%= f.fields_for :configuration do |configuration| %>
-      <%= render 'shared/configuration_fields', f: configuration %>
-    <% end %>
-  </div>
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
+    <%= f.button :submit, 'Update', class: 'btn btn-primary pull-right' %>
+  </div>  
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

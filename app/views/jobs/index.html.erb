@@ -1,23 +1,56 @@
-<h1>Jobs</h1>
+<div class="page-title">
+  <div class="title_left">
+    <h1>Jobs</h1>
+  </div>
+  <div class="title_right">
+    <div class="col-xs-12 form-group top_search">
+        <%= link_to "New Job", new_job_path, class: "btn btn-sm btn-default pull-right" %>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_content">
+      <div class="table-responsive">
+        <table class="table table-striped jambo_table">
+          <thead>
+            <tr class="headings">
+              <th class="column-title">Name</th>
+              <th class="column-title">Active From</th>
+              <th class="column-title">To</th>
+              <th class="column-title">Active</th>
+              <th class="column-title">Status</th>
+              <th class="column-title no-link last"><span class="nobr">Action</span>
+              </th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.name %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <tbody>
+            <% if @jobs.any? %>
+              <% @jobs.each_with_index do |job, index| %>
+                <tr class="<%= index.even? ? "even" : "odd" %> pointer">
+                  <td><%= job.name %></td>
+                  <td class="a-center"><%= job.start_date %></td>
+                  <td class="a-center"><%= job.end_date %></td>
+                  <td class="a-center"><%= content_tag(:i, '',  class: 'fa fa-check') if job.enabled? %></td>
+                  <td></td>
+                  <td>
+                    <%= link_to 'Edit', edit_job_path(job), class: "btn btn-xs btn-default" %>
+                    <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-default" %></td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="7">No jobs</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br>
 
-<%= link_to 'New Job', new_job_path %>
