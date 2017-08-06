@@ -1,6 +1,6 @@
-class CreateJobsResults < ActiveRecord::Migration[5.1]
+class CreateResults < ActiveRecord::Migration[5.1]
   def change
-    create_table :jobs_results do |t|
+    create_table :results do |t|
       t.references :job, foreign_key: true
       t.text :result
 

@@ -10,26 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805200735) do
+ActiveRecord::Schema.define(version: 20170805200736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "atom_hierarchies", id: false, force: :cascade do |t|
+  create_table "actions", force: :cascade do |t|
+    t.bigint "step_id"
+    t.bigint "atom_id"
+    t.text "return_block"
+    t.boolean "enabled"
+    t.integer "order", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.index ["atom_id"], name: "index_actions_on_atom_id"
+    t.index ["step_id"], name: "index_actions_on_step_id"
+  end
+
+  create_table "actions_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id", null: false
     t.integer "descendant_id", null: false
     t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "atom_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "atom_desc_idx"
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "actions_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "actions_desc_idx"
   end
 
   create_table "atoms", force: :cascade do |t|
     t.string "name"
     t.boolean "enabled"
     t.string "class_name"
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "parent_id"
   end
 
   create_table "configurations", force: :cascade do |t|
@@ -58,44 +71,41 @@ ActiveRecord::Schema.define(version: 20170805200735) do
     t.boolean "customizable"
   end
 
-  create_table "jobs_actions", force: :cascade do |t|
-    t.bigint "jobs_steps_id"
-    t.text "return_block"
-    t.boolean "enabled"
-    t.integer "order", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "atom_id"
-    t.index ["atom_id"], name: "index_jobs_actions_on_atom_id"
-    t.index ["jobs_steps_id"], name: "index_jobs_actions_on_jobs_steps_id"
-  end
-
-  create_table "jobs_results", force: :cascade do |t|
+  create_table "results", force: :cascade do |t|
     t.bigint "job_id"
     t.text "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_jobs_results_on_job_id"
+    t.index ["job_id"], name: "index_results_on_job_id"
   end
 
-  create_table "jobs_rules", force: :cascade do |t|
-    t.bigint "jobs_steps_id"
+  create_table "rules", force: :cascade do |t|
+    t.bigint "step_id"
+    t.bigint "atom_id"
     t.text "return_block"
     t.boolean "enabled"
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "atom_id"
-    t.index ["atom_id"], name: "index_jobs_rules_on_atom_id"
-    t.index ["jobs_steps_id"], name: "index_jobs_rules_on_jobs_steps_id"
+    t.integer "parent_id"
+    t.index ["atom_id"], name: "index_rules_on_atom_id"
+    t.index ["step_id"], name: "index_rules_on_step_id"
   end
 
-  create_table "jobs_steps", force: :cascade do |t|
+  create_table "rules_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "rules_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "rules_desc_idx"
+  end
+
+  create_table "steps", force: :cascade do |t|
     t.bigint "job_id"
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_jobs_steps_on_job_id"
+    t.index ["job_id"], name: "index_steps_on_job_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,7 +137,9 @@ ActiveRecord::Schema.define(version: 20170805200735) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "jobs_actions", "jobs_steps", column: "jobs_steps_id"
-  add_foreign_key "jobs_results", "jobs"
-  add_foreign_key "jobs_rules", "jobs_steps", column: "jobs_steps_id"
+  add_foreign_key "actions", "atoms"
+  add_foreign_key "actions", "steps"
+  add_foreign_key "results", "jobs"
+  add_foreign_key "rules", "atoms"
+  add_foreign_key "rules", "steps"
 end
