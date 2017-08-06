@@ -1,8 +1,8 @@
 <div class="nested-fields">
-  <%= f.input :track_job_results, as: :boolean %>
-  <%= f.input :track_job_status, as: :boolean %>
-  <%= f.input :job_method %>
-  <%= f.input :preliminary_header_check, as: :boolean %>
-  <%= f.input :job_notification, as: :boolean %>
-  <%= f.input :job_notification_method %>  
+  <%= f.input :track_job_results, as: :boolean, input_html: {class: 'configuration-field'} %>
+  <%= f.input :track_job_status, as: :boolean, input_html: {class: 'configuration-field'} %>
+  <%= f.input :job_method, input_html: {class: 'configuration-field'} %>
+  <%= f.input :preliminary_header_check, as: :boolean, input_html: {class: 'configuration-field'} %>
+  <%= f.input :job_notification, as: :boolean, input_html: {class: 'configuration-field'} %>
+  <%= f.input :job_notification_method, input_html: {class: 'configuration-field'} %>  
 </div>

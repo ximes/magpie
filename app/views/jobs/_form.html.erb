@@ -39,7 +39,7 @@
       <div class="x_content">
         <%= f.input :customizable %>
 
-        <div class="form-actions" id="custom-configuration">
+        <div class="form-actions" id="custom-configuration" style="display: none;">
           <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
             <%= render 'shared/configuration_fields', f: configuration %>
           <% end %>

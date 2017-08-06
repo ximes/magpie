@@ -45,7 +45,7 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <div class="form-actions" id="custom-configuration">
+        <div class="form-actions">
           <%= f.fields_for :configuration do |configuration| %>
             <%= render 'shared/configuration_fields', f: configuration %>
           <% end %>
