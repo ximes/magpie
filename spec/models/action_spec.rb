@@ -1,11 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Action, type: :model  do
-  describe "ActiveModel validations" do
-    it { expect(subject).to validate_presence_of(:name) }
-    it { expect(subject).to validate_presence_of(:class_name) }
-    it { expect(subject).to respond_to(:enabled?) }
-  end
   describe "ActiveModel associations" do
     it { expect(subject).to have_many(:jobs_actions) }
   end
@@ -36,6 +31,7 @@ RSpec.describe Action, type: :model  do
   xit "export a rendered page"
 
   xit "return its value"
+  xit "return its plain text content"
   xit "return its tag attributes as object attributes"
   xit "search for its attributes (1..n attributes)"
 
