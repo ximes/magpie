@@ -19,4 +19,15 @@ class Job < ApplicationRecord
   def configuration
     customizable? ? super : build_configuration(user.configuration.accessible_attributes)
   end
+
+  def perform
+    steps.each do |step|
+      p step.rules
+      step.rules.each do |rule|
+
+        p rule.atom.class_name.constantize
+        rule.atom.class_name.constantize.new.execute
+      end
+    end
+  end
 end

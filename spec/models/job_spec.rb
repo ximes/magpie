@@ -64,13 +64,34 @@ RSpec.describe Job, type: :model  do
     end
   end
 
+  describe "when set up" do
+    it "can be launched" do
+      expect(subject).to respond_to(:perform)
+    end
+  end
+  describe "when performed" do
+    let(:subject) { create :valid_job_with_rules }
+    before do
+    end
+
+    it "runs through all rules" do
+      save_count = 0
+
+      allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |args|
+        save_count += 1
+      end
+
+      subject.perform
+
+      expect(save_count).to eq(4)
+    end
+  end
   # xit 'has a notification_channel' TODO
   # xit 'has a base_url_type (protected, unprotected)'
   # xit 'has a auth_credentials (protected, unprotected)' TODO
 
   xit "can be enabled or not"
   xit "can be scheduled"
-  xit "can be launched"
   xit "can check for page updates base on previous version"
   xit "can check for page updates in the last (n) amount of time"
   xit "it can parse html"
