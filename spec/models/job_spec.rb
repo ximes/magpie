@@ -25,7 +25,6 @@ RSpec.describe Job, type: :model  do
 
   describe "ActiveModel associations" do
     it { expect(subject).to have_many(:steps).dependent(:destroy)  }
-    it { expect(subject).to have_many(:actions).through(:steps) }
     it { expect(subject).to have_many(:rules).through(:steps) }
     it { expect(subject).to have_one(:result).dependent(:destroy) }
     it { expect(subject).to respond_to(:results) }

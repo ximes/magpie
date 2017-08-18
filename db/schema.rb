@@ -15,32 +15,10 @@ ActiveRecord::Schema.define(version: 20170805200736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "actions", force: :cascade do |t|
-    t.bigint "step_id"
-    t.bigint "atom_id"
-    t.text "return_block"
-    t.boolean "enabled"
-    t.integer "order", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "parent_id"
-    t.index ["atom_id"], name: "index_actions_on_atom_id"
-    t.index ["step_id"], name: "index_actions_on_step_id"
-  end
-
-  create_table "actions_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "actions_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "actions_desc_idx"
-  end
-
   create_table "atoms", force: :cascade do |t|
     t.string "name"
     t.boolean "enabled"
     t.string "class_name"
-    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,25 +57,26 @@ ActiveRecord::Schema.define(version: 20170805200736) do
     t.index ["job_id"], name: "index_results_on_job_id"
   end
 
+  create_table "rule_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "rule_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "rule_desc_idx"
+  end
+
   create_table "rules", force: :cascade do |t|
     t.bigint "step_id"
     t.bigint "atom_id"
     t.text "return_block"
     t.boolean "enabled"
+    t.string "type"
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent_id"
     t.index ["atom_id"], name: "index_rules_on_atom_id"
     t.index ["step_id"], name: "index_rules_on_step_id"
-  end
-
-  create_table "rules_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "rules_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "rules_desc_idx"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -137,8 +116,6 @@ ActiveRecord::Schema.define(version: 20170805200736) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "actions", "atoms"
-  add_foreign_key "actions", "steps"
   add_foreign_key "results", "jobs"
   add_foreign_key "rules", "atoms"
   add_foreign_key "rules", "steps"
