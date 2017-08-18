@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(email: "admim@example.com", password: "password")
 
+Atom.create(name: "Test", class_name: "Atoms::Test::Test", enabled: false)
 Atom.create(name: "Click", class_name: "Atoms::Events::Click", enabled: true)
 Atom.create(name: "CssSelector", class_name: "Atoms::Matchers::CssSelector", enabled: true)
 Atom.create(name: "Failed", class_name: "Atoms::Markers::Failed", enabled: true)
