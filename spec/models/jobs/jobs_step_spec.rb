@@ -11,12 +11,16 @@ RSpec.describe Jobs::Step do
   end
 
   describe "when returning children" do
-    let!(:job) { create :valid_job }
+    let!(:job) { create :valid_job_with_rules  }
     let!(:step) { job.steps.create }
     let!(:first_child) { build(:atom, name: "first child") }
+    let!(:children) { ["child 1", "child 2"] }
 
     before do
       step.rules.build(atom: first_child)
+      children.each do |child|
+        step.rules.first.children << step.rules.build(atom: build(:atom, name: child))
+      end
       step.save!
     end
 
@@ -25,12 +29,6 @@ RSpec.describe Jobs::Step do
     end
 
     it "should return all" do
-      children = ["child 1", "child 2"]
-      children.each do |child|
-        step.rules.first.children << step.rules.build(atom: build(:atom, name: child))
-      end
-
-      expect(step.rules.root.name).to eq("first child")
       expect(step.rules.first.descendants.map(&:name)).to eq(children)
       expect(step.rules.first.self_and_descendants.map(&:name)).to eq([first_child.name] + children)
     end

@@ -6,6 +6,16 @@ FactoryGirl.define do
 
     factory :valid_job do
       url "http://www.google.com"
+
+      factory :valid_job_with_rules do
+        transient do
+          step_count 2
+        end
+
+        after(:create) do |job, evaluator|
+          create_list(:step_with_rules, evaluator.step_count, job: job)
+        end
+      end
     end
   end
 end
