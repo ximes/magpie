@@ -10,6 +10,10 @@ FactoryGirl.define do
       after(:create) do |step, evaluator|
         create_list(:rule_with_atoms, evaluator.rule_count, step: step)
       end
+
+      after(:create) do |step, evaluator|
+        create_list(:nested_rule_with_atoms, evaluator.rule_count, step: step)
+      end
     end
   end
 end

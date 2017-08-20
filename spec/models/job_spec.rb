@@ -83,7 +83,7 @@ RSpec.describe Job, type: :model  do
 
       subject.perform
 
-      expect(save_count).to eq(4)
+      expect(save_count).to eq(8)
     end
   end
   # xit 'has a notification_channel' TODO
