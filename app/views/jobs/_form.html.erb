@@ -1,51 +1,78 @@
 <%= simple_form_for(@job) do |f| %>
   <%= f.error_notification %>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Details</h2>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-        <%= f.association :user, as: :hidden %>
-        <div class="form-inputs">
-          <%= f.input :name %>
-          <%= f.input :url %>
-          <%= f.input :enabled %>
+  <div class="" role="tabpanel" data-example-id="togglable-tabs"> 
+    <ul id="job-details" class="nav nav-tabs bar_tabs" role="tablist">
+      <li role="presentation" class="<%= "active" if @job.new_record? %>"><a href="#tab_content1" id="settings-tab" role="tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? true : false %>">Settings</a></li>
+      <li role="presentation" class="<%= "active" unless @job.new_record? %>"><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? false : true %>">Rules</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade <%= "active in" if @job.new_record? %>" id="tab_content1" aria-labelledby="settings-tab">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Details</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <%= f.association :user, as: :hidden %>
+              <div class="form-inputs">
+                <%= f.input :name %>
+                <%= f.input :url %>
+                <%= f.input :enabled %>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Schedule</h2>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-        <div class="form-inputs">
-          <%= f.input :start_date %>
-          <%= f.input :end_date %>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Schedule</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="form-inputs">
+                <%= f.input :start_date %>
+                <%= f.input :end_date %>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Configuration</h2>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-        <%= f.input :customizable %>
+        <div class="col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Configuration</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <%= f.input :customizable %>
 
-        <div class="form-actions" id="custom-configuration" style="display: none;">
-          <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
-            <%= render 'shared/configuration_fields', f: configuration %>
-          <% end %>
+              <div class="form-actions" id="custom-configuration" style="display: none;">
+                <%= f.fields_for :configuration, f.object.configuration do |configuration| %>
+                  <%= render 'shared/configuration_fields', f: configuration %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade <%= "active in" unless @job.new_record? %>" id="tab_content2" aria-labelledby="profile-tab">
+        <div class="col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Rules</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="form-actions" id="rules">
+                Rules!
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <%= f.button :submit, class: 'btn btn-primary pull-right' %>
   </div>
-  <%= f.button :submit, class: 'btn btn-primary pull-right' %>
+
+
 <% end %>
