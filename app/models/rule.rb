@@ -1,5 +1,5 @@
 class Rule < ApplicationRecord
-  has_closure_tree
+  acts_as_nested_set
 
   validates :order, numericality: true
 

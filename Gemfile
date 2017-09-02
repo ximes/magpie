@@ -8,10 +8,9 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+# Nested set node parsing
+gem 'awesome_nested_set', "~> 3.1.3"
 gem "bootstrap-sass", "~> 3.3.6"
-# Tree/Graph node parsing
-gem "closure_tree", "~>  6.6.0"
 # Nested forms
 gem "cocoon", "~> 1.2.10"
 # Javascript libs

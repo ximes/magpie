@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805200736) do
+ActiveRecord::Schema.define(version: 20170805200334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,14 +57,6 @@ ActiveRecord::Schema.define(version: 20170805200736) do
     t.index ["job_id"], name: "index_results_on_job_id"
   end
 
-  create_table "rule_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "rule_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "rule_desc_idx"
-  end
-
   create_table "rules", force: :cascade do |t|
     t.bigint "step_id"
     t.bigint "atom_id"
@@ -75,6 +67,10 @@ ActiveRecord::Schema.define(version: 20170805200736) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.integer "depth", default: 0, null: false
+    t.integer "children_count", default: 0, null: false
     t.index ["atom_id"], name: "index_rules_on_atom_id"
     t.index ["step_id"], name: "index_rules_on_step_id"
   end
