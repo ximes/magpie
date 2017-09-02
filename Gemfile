@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+source "https://rails-assets.org"
 source "https://rubygems.org"
 
 ruby "2.4.0"
@@ -27,6 +28,7 @@ gem "gentelella-rails", "~> 0.1.8"
 gem "jbuilder", "~> 2.5"
 # Javascript libs
 gem "jquery-rails", "~> 4.3.1"
+gem "jquery-ui-rails", "~> 6.0.1"
 # Used by devise per authentication
 gem "omniauth-facebook", "~> 4.0.0"
 # Use postgresql as the database for Active Record
@@ -37,12 +39,15 @@ gem "puma", "~> 3.7"
 gem "paper_trail"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.1.2"
+# Javascript libs
+gem "rails-assets-growl"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Form helpers
 gem "simple_form", "~> 3.5.0"
+gem "the_sortable_tree", "~> 2.5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # For url validation

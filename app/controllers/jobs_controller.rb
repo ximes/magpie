@@ -14,6 +14,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1/edit
   def edit
+    @job.steps.first_or_create
   end
 
   # POST /jobs

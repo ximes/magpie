@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   }
 
   resources :jobs
+  resources :rules do 
+    patch "move", to: "rules#move", on: :member
+  end
   root to: "homepage#index"
 end

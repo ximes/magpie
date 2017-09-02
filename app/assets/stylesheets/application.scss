@@ -4,10 +4,18 @@
 @import "bootstrap";
 @import "gentelella";
 @import "gentelella-custom";
+@import "jquery-ui";
+@import "growl";
 
 .navbar-default{
   margin-bottom: 0;
 }
 .nav-item form{
   margin-top: 12px;
+}
+.sortable{
+  min-height: 20px;
+}
+.mjs-nestedSortable-error{
+  background-color: #fcc;
 }
