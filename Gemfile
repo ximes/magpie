@@ -10,7 +10,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 # Nested set node parsing
-gem 'awesome_nested_set', "~> 3.1.3"
+gem "awesome_nested_set", "~> 3.1.3"
 gem "bootstrap-sass", "~> 3.3.6"
 # Nested forms
 gem "cocoon", "~> 1.2.10"

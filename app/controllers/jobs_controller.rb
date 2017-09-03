@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_atoms, only: [:edit, :new]
 
   # GET /jobs
   # GET /jobs.json
@@ -23,7 +24,7 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
-        format.html { redirect_to jobs_path, notice: "Job was successfully created." }
+        format.html { redirect_to edit_job_path(@job), notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: jobs_path }
       else
         #raise @job.errors.inspect
@@ -61,6 +62,10 @@ class JobsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_job
       @job = Job.find(params[:id])
+    end
+
+    def set_atoms
+      @atoms = Atom.all.map{|atom| [atom, atom.class_name.constantize.new] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

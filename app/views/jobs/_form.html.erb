@@ -84,13 +84,30 @@
             </div>
             <div class="x_content">
               <div class="form-actions" id="rules">
-                <ol class="draggable connectedList">
-                  <% Atom.all.each do |rule| %>
-                    <li data-id="<%= rule.id %>">
-                      <div><%= rule.name %></div>
+                <% @atoms.group_by{|id, rule| rule.class.type}.each do |group, rules| %> 
+                  <h4><%= group %></h4>
+                  <ul class="draggable connectedList to_do">
+                  <% rules.each do |atom, rule| %>
+                    <li data-id="<%= atom.id %>" class="available-rule bg-<%= class_by_atom(rule.class.type) %> <%= rule.custom_css_class %>">
+                      <!-- replace with single atom template -->
+                      <div>
+                        <p><%= atom.name %></p>
+                        <div class="template collapse">
+                          <ol>
+                            <li class='selected-rule bg-<%= class_by_atom(atom.class_name.constantize.type) %> <%= atom.class_name.constantize.new.custom_css_class %>' data-id='<%= atom.id %>'>
+                              <div>
+                                <%= atom.name %>
+                                <%= rule.accessible_options %>
+                                <input type="text" name="as">
+                              </div>
+                            </li>
+                          </ol>
+                        </div>
+                      </div>
                     </li>
                   <% end %>
-                </ol>
+                  </ul>
+                <% end %>
               </div>
             </div>
           </div>

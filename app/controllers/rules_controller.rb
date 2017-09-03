@@ -38,15 +38,9 @@ class RulesController < ApplicationController
 
   def move
     parent = Rule.find_by(id: rule_parent_params[:parent_id])
-    if parent
-      position_saved = @rule.move_to_child_with_index(parent, rule_parent_params[:order].to_i)
-    else
-      @rule.update_attribute(:order, rule_parent_params[:order].to_i)
-      position_saved = @rule.move_to_root
-    end
-
+    
     respond_to do |format|
-      if position_saved
+      if parent ? @rule.move_to_child_with_index(parent, rule_parent_params[:order].to_i) : @rule.move_to_root
         format.json { render :show, status: :ok, location: @rule }
       else
         format.json { render json: @rule.errors, status: :unprocessable_entity }

@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20170805200334) do
     t.bigint "atom_id"
     t.text "return_block"
     t.boolean "enabled"
-    t.string "type"
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

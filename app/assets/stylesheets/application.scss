@@ -19,3 +19,17 @@
 .mjs-nestedSortable-error{
   background-color: #fcc;
 }
+
+.available-rule{
+  display: inline-block; 
+  width: 48%;
+  height: 30px;
+  border: 1px solid #ccc;
+}
+.selected-rule{
+  display: block; 
+  clear: both;
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #ccc;
+}

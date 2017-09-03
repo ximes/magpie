@@ -11,6 +11,10 @@ module Atoms
     def self.type
       (self.name.split("::").tap(&:pop) - [MODULE_NAME]).join("::")
     end
+    
+    def custom_css_class
+      ''
+    end
 
     def execute
       raise "Parent Atom is not executable"

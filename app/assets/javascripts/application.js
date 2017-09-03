@@ -22,13 +22,10 @@ function toggle_job_customization(){
 }
 
 function addLeaf(event, data){
-  console.log("add!")
-  console.log(data)
   let item = data.item[0];
   let item_id = $(item).data('id');
   let step_id = $(event.target).data('step');
   let atom_id = $(item).data('id');
-
   
   let rule_info = { step_id: step_id, atom_id: atom_id, order: data.item.index() };
   if (item.parentNode.parentElement.dataset.id !== undefined){
@@ -36,7 +33,6 @@ function addLeaf(event, data){
   }
 
   let post_data = {rule: rule_info}
-  //console.log(data.item.index());
 
   var request = $.ajax({
     url: "/rules/",
@@ -46,13 +42,11 @@ function addLeaf(event, data){
    
   request.done(function(response) {
     $(data.item[0]).data("id", response.id);
-    $.growl({ message: "yeeeee" });
+    $.growl({ message: "Done" });
   });
    
-  request.fail(function( jqXHR, textStatus, msg ) {
-    $.growl.error({ message: jqXHR });
-    console.log(msg)
-    console.log(textStatus)
+  request.fail(function( jqXHR, textStatus ) {
+    $.growl.error({ message: "An error occurred" + textStatus });
   });
 }
 function updateLeaf(event, data){
@@ -62,16 +56,13 @@ function updateLeaf(event, data){
   let item = data.item[0];
   let item_id = $(item).data('id');
   let order = $(item).data('id');
-  console.log(data)
+
   let rule_info = {order: data.item.index()};
   if (item.parentNode.parentElement.dataset.id !== undefined){
     rule_info['parent_id'] = item.parentNode.parentElement.dataset.id;
   }
   let post_data = {rule: rule_info};
   
-  console.log(post_data)
-  console.log(item_id)
-
   var request = $.ajax({
     url: "/rules/" + item_id,
     method: "PATCH",
@@ -79,27 +70,20 @@ function updateLeaf(event, data){
   });
    
   request.done(function( msg ) {
-    $.growl({ message: "yeeeee" });
+    $.growl({ message: "Done" });
   });
    
   request.fail(function( jqXHR, textStatus ) {
-    $.growl.error({ message: "The kitten is attacking!" + textStatus });
+    $.growl.error({ message: "An error occurred" + textStatus });
   });
 }
 
 function moveLeaf(event, data){
-  console.log("move!!")
-  //update leaf
-
   let item = data.item[0];
   let item_id = $(item).data('id');
   let order = $(item).data('id');
   
   let post_data = {rule: {parent_id: item.parentNode.parentElement.dataset.id || 0, order: data.item.index()}};
-  
-  console.log(item_id)
-  console.log(post_data)
-  console.log(data)
 
   var request = $.ajax({
     url: "/rules/" + item_id + "/move",
@@ -108,11 +92,11 @@ function moveLeaf(event, data){
   });
    
   request.done(function( msg ) {
-    $.growl({ message: "yeeeee" });
+    $.growl({ message: "Done" });
   });
    
   request.fail(function( jqXHR, textStatus ) {
-    $.growl.error({ message: "The kitten is attacking!" + textStatus });
+    $.growl.error({ message: "An error occurred" + textStatus });
   });
 }
 
@@ -122,12 +106,12 @@ $(document).ready(function(){
 
   $('.draggable').sortable({
     connectWith: '.connectedList',
-    helper: function(e, li) {
-        copyHelper= li.clone().insertAfter(li);
-        return li.clone();
-    },
+    // helper: function(e, li) {
+    //     copyHelper= li.clone().insertAfter(li);
+    //     return li.clone();
+    // },
     stop: function() {
-        copyHelper && copyHelper.remove();
+        //copyHelper && copyHelper.remove();
     }
   }).disableSelection();
 
@@ -175,8 +159,12 @@ $(document).ready(function(){
     },
     receive: function(event, data) {
       addLeaf(event, data);
-      copyHelper= null;
-    }
+      //copyHelper= null;
+      data.sender.sortable("cancel");
+
+      $($(data.item[0]).find(".template li")).appendTo(this);
+      this.sortable('refresh');
+    },
   }).disableSelection();
 
 });
