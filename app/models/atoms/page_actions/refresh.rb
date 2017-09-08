@@ -1,7 +1,5 @@
 module Atoms::PageActions
   class Refresh < Atoms::Rule
-    def custom_css_class
-      "mjs-nestedSortable-no-nesting"
-    end
+    def self.nestable?; false; end
   end
 end

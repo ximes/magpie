@@ -13,4 +13,12 @@ class Rule < ApplicationRecord
   def name
     "#{atom.name}"
   end
+
+  def nestable?
+    atom.class_name.constantize.nestable?
+  end
+
+  def atom_instance
+    atom.class_name.constantize.new(enabled, options)
+  end
 end

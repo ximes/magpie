@@ -1,19 +1,24 @@
 module Atoms
-  class Rule
+  class Rule < Cell::ViewModel
     MODULE_NAME = "Atoms"
 
-    def initialize(options = {})
+    self.view_paths = ["app/views"]
+
+    include ::Cell::Erb
+
+    def initialize(enabled = true, options = {})
       options.each do |key, option|
-        instance_variable_set("@#{key}", option) if accessible_options.include? key
+        instance_variable_set("@#{key}", option) if accessible_options.include? key.to_sym
       end
+      @enabled = enabled
+    end
+
+    def self.nestable?
+      true
     end
 
     def self.type
       (self.name.split("::").tap(&:pop) - [MODULE_NAME]).join("::")
-    end
-    
-    def custom_css_class
-      ''
     end
 
     def execute
@@ -22,6 +27,26 @@ module Atoms
 
     def accessible_options
       []
+    end
+
+    # view/model methods
+
+    def update_url
+      Rails.application.routes.url_helpers.rules_path
+    end
+
+    # it renders the cell. TODO, is there any cell's method for that?
+    def render_inline
+      self.()
+    end
+
+    def show
+      @rule = self
+      render
+    end
+
+    def atom_actions
+      render partial: "atoms/shared/actions"
     end
   end
 end

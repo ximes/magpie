@@ -21,58 +21,55 @@ function toggle_job_customization(){
   }
 }
 
-function addLeaf(event, data){
+function addLeaf(receiver, event, data){
   let item = data.item[0];
   let item_id = $(item).data('id');
   let step_id = $(event.target).data('step');
   let atom_id = $(item).data('id');
-  
+  let item_template = $(data.item[0]).find(".template li");  
   let rule_info = { step_id: step_id, atom_id: atom_id, order: data.item.index() };
+
   if (item.parentNode.parentElement.dataset.id !== undefined){
     rule_info['parent_id'] = item.parentNode.parentElement.dataset.id;
   }
 
   let post_data = {rule: rule_info}
 
+  $(item_template).clone().addClass('added').appendTo(receiver);
+
   var request = $.ajax({
     url: "/rules/",
     method: "POST",
     data: post_data
   });
-   
+
   request.done(function(response) {
-    $(data.item[0]).data("id", response.id);
-    $.growl({ message: "Done" });
+    $('.added').attr("data-id", response.id).removeClass('added');
   });
-   
+ 
+  $(receiver).sortable('refresh');
+
   request.fail(function( jqXHR, textStatus ) {
     $.growl.error({ message: "An error occurred" + textStatus });
   });
 }
-function updateLeaf(event, data){
-  console.log("update!")
-  //update leaf
-
-  let item = data.item[0];
+function updateLeaf(rule){
+  let item = $(rule).parents('.selected-rule');
   let item_id = $(item).data('id');
-  let order = $(item).data('id');
+  let item_name = $(rule).attr('name');
 
-  let rule_info = {order: data.item.index()};
-  if (item.parentNode.parentElement.dataset.id !== undefined){
-    rule_info['parent_id'] = item.parentNode.parentElement.dataset.id;
+  let rule_info = {};
+  if (item_name !== undefined){
+    rule_info[item_name] = $(rule).val();
   }
   let post_data = {rule: rule_info};
-  
+
   var request = $.ajax({
     url: "/rules/" + item_id,
     method: "PATCH",
     data: post_data
   });
-   
-  request.done(function( msg ) {
-    $.growl({ message: "Done" });
-  });
-   
+
   request.fail(function( jqXHR, textStatus ) {
     $.growl.error({ message: "An error occurred" + textStatus });
   });
@@ -82,7 +79,6 @@ function moveLeaf(event, data){
   let item = data.item[0];
   let item_id = $(item).data('id');
   let order = $(item).data('id');
-  
   let post_data = {rule: {parent_id: item.parentNode.parentElement.dataset.id || 0, order: data.item.index()}};
 
   var request = $.ajax({
@@ -90,11 +86,47 @@ function moveLeaf(event, data){
     method: "PATCH",
     data: post_data
   });
-   
-  request.done(function( msg ) {
-    $.growl({ message: "Done" });
+
+  request.fail(function( jqXHR, textStatus ) {
+    $.growl.error({ message: "An error occurred" + textStatus });
+  });
+}
+
+function removeLeaf(rule){
+  let item = $(rule).closest('.selected-rule');
+  let item_id = $(item).data('id');
+
+  var request = $.ajax({
+    url: "/rules/" + item_id,
+    method: "DELETE",
   });
    
+  request.done(function( msg ) {
+    item.remove();
+  });
+   
+  request.fail(function( jqXHR, textStatus ) {
+    $.growl.error({ message: "An error occurred" + textStatus });
+  });
+}
+
+function toggleLeaf(rule){
+  let item = $(rule).closest('.selected-rule');
+  let item_id = $(item).data('id');
+
+  $(item).find("[name=toggle]").val($(item).find("[name=toggle]").val() == "false" ? true : false);
+
+  $(rule).find("i").toggleClass("fa-eye-slash").toggleClass("fa-eye");
+  $(item).toggleClass("disabled-rule");
+
+  let post_data = {rule: {"enabled": $(item).find("[name=toggle]").val() }};
+
+  var request = $.ajax({
+    url: "/rules/" + item_id,
+    method: "PATCH",
+    data: post_data
+  });
+      
   request.fail(function( jqXHR, textStatus ) {
     $.growl.error({ message: "An error occurred" + textStatus });
   });
@@ -106,12 +138,8 @@ $(document).ready(function(){
 
   $('.draggable').sortable({
     connectWith: '.connectedList',
-    // helper: function(e, li) {
-    //     copyHelper= li.clone().insertAfter(li);
-    //     return li.clone();
-    // },
-    stop: function() {
-        //copyHelper && copyHelper.remove();
+    stop: function(ev, ui) {
+      $(this).sortable("cancel");
     }
   }).disableSelection();
 
@@ -158,13 +186,20 @@ $(document).ready(function(){
       moveLeaf(event, data);
     },
     receive: function(event, data) {
-      addLeaf(event, data);
+      addLeaf(this, event, data);
       //copyHelper= null;
       data.sender.sortable("cancel");
-
-      $($(data.item[0]).find(".template li")).appendTo(this);
-      this.sortable('refresh');
+      $(this).sortable('refresh');
     },
   }).disableSelection();
 
+  $(".selected-rule .form-control").on('change', function(){
+    updateLeaf(this);
+  });
+  $(document).on('click', ".selected-rule .delete-node", function(){
+    removeLeaf(this);
+  });
+  $(document).on('click', ".selected-rule .hide-node", function(){
+    toggleLeaf(this);
+  });
 });

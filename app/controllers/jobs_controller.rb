@@ -65,7 +65,7 @@ class JobsController < ApplicationController
     end
 
     def set_atoms
-      @atoms = Atom.all.map{|atom| [atom, atom.class_name.constantize.new] }
+      @atoms = Atom.all.map { |atom| [atom, atom.class_name.constantize.new] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

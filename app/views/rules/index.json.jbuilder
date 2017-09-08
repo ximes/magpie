@@ -1,1 +1,1 @@
-json.array! @rules, partial: 'rules/rule', as: :rule
+json.array! @rules, partial: "rules/rule", as: :rule

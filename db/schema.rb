@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170805200334) do
     t.bigint "step_id"
     t.bigint "atom_id"
     t.text "options"
-    t.boolean "enabled"
+    t.boolean "enabled", default: true
     t.integer "order", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

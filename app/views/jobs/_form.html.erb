@@ -88,22 +88,8 @@
                   <h4><%= group %></h4>
                   <ul class="draggable connectedList to_do">
                   <% rules.each do |atom, rule| %>
-                    <li data-id="<%= atom.id %>" class="available-rule bg-<%= class_by_atom(rule.class.type) %> <%= rule.custom_css_class %>">
-                      <!-- replace with single atom template -->
-                      <div>
-                        <p><%= atom.name %></p>
-                        <div class="template collapse">
-                          <ol>
-                            <li class='selected-rule bg-<%= class_by_atom(atom.class_name.constantize.type) %> <%= atom.class_name.constantize.new.custom_css_class %>' data-id='<%= atom.id %>'>
-                              <div>
-                                <%= atom.name %>
-                                <%= rule.accessible_options %>
-                                <input type="text" name="as">
-                              </div>
-                            </li>
-                          </ol>
-                        </div>
-                      </div>
+                    <li class="available-rule bg-<%= class_by_atom(atom.class_name.constantize.type) %>" data-id="<%= atom.id %>">
+                      <%= rule_with_template(atom).html_safe %>
                     </li>
                   <% end %>
                   </ul>

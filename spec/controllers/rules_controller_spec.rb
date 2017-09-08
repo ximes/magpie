@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RulesController, type: :controller do
 
@@ -23,7 +23,7 @@ RSpec.describe RulesController, type: :controller do
   describe "GET #edit" do
     it "returns a success response" do
       rule = Rule.create! valid_attributes
-      get :edit, params: {id: rule.to_param}, session: valid_session
+      get :edit, params: { id: rule.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
@@ -32,14 +32,14 @@ RSpec.describe RulesController, type: :controller do
     context "with valid params" do
       it "creates a new Rule" do
         expect {
-          post :create, params: {rule: valid_attributes}, session: valid_session
+          post :create, params: { rule: valid_attributes }, session: valid_session
         }.to change(Rule, :count).by(1)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {rule: invalid_attributes}, session: valid_session
+        post :create, params: { rule: invalid_attributes }, session: valid_session
         expect(response).to be_success
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe RulesController, type: :controller do
 
       it "updates the requested rule" do
         rule = Rule.create! valid_attributes
-        put :update, params: {id: rule.to_param, rule: new_attributes}, session: valid_session
+        put :update, params: { id: rule.to_param, rule: new_attributes }, session: valid_session
         rule.reload
         skip("Add assertions for updated state")
       end
@@ -62,7 +62,7 @@ RSpec.describe RulesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         rule = Rule.create! valid_attributes
-        put :update, params: {id: rule.to_param, rule: invalid_attributes}, session: valid_session
+        put :update, params: { id: rule.to_param, rule: invalid_attributes }, session: valid_session
         expect(response).to be_success
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe RulesController, type: :controller do
     it "destroys the requested rule" do
       rule = Rule.create! valid_attributes
       expect {
-        delete :destroy, params: {id: rule.to_param}, session: valid_session
+        delete :destroy, params: { id: rule.to_param }, session: valid_session
       }.to change(Rule, :count).by(-1)
     end
   end
