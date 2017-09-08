@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170805200334) do
   create_table "rules", force: :cascade do |t|
     t.bigint "step_id"
     t.bigint "atom_id"
-    t.text "return_block"
+    t.text "options"
     t.boolean "enabled"
     t.integer "order", default: 0
     t.datetime "created_at", null: false

@@ -8,6 +8,8 @@ class Rule < ApplicationRecord
 
   scope :first_children, -> { where(parent_id: nil) }
 
+  store :options, coder: JSON
+
   def name
     "#{atom.name}"
   end
