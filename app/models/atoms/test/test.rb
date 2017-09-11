@@ -1,5 +1,5 @@
 module Atoms::Test
-  class Test < Atoms::RuleCell
+  class Test < Atoms::Rule
     def execute
       super
     end

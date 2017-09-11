@@ -30,7 +30,7 @@ RSpec.describe Jobs::Step do
 
     it "should return all" do
       expect(step.rules.first.descendants.map(&:name)).to eq(children)
-      expect(step.rules.first.self_and_descendants.map(&:name)).to eq(children + [first_child.name])
+      expect(step.rules.first.self_and_descendants.map(&:name)).to eq([first_child.name] + children)
     end
   end
 end

@@ -15,3 +15,4 @@ Atom.create(name: "Successful", class_name: "Atoms::Markers::Successful", enable
 Atom.create(name: "Refresh", class_name: "Atoms::PageActions::Refresh", enabled: true)
 Atom.create(name: "Text", class_name: "Atoms::Values::Text", enabled: true)
 Atom.create(name: "Value", class_name: "Atoms::Values::Value", enabled: true)
+Atom.create(name: "Visit", class_name: "Atoms::PageActions::Visit", enabled: true)

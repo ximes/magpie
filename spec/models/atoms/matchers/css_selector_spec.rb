@@ -8,7 +8,7 @@ RSpec.describe Atoms::Matchers::CssSelector, type: :model  do
   end
 
   it_behaves_like "an atom rule" do
-    let(:rule) { described_class.new(options) }
+    let(:rule) { described_class.new(true, options) }
   end
 
   describe "when executing" do
