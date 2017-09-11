@@ -68,6 +68,7 @@ group :test do
   gem "database_cleaner"
   gem "factory_girl_rails", "~> 4.8.0"
   gem "shoulda-matchers", git: "https://github.com/thoughtbot/shoulda-matchers.git", branch: "rails-5"
+  gem "simplecov", "~> 0.15.0", require: false
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
