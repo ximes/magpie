@@ -329,6 +329,8 @@ GEM
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uber (0.1.0)
+    uglifier (3.2.0)
+      execjs (>= 0.3.0, < 3)
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
@@ -380,6 +382,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   the_sortable_tree (~> 2.5.0)
   tzinfo-data
+  uglifier
   validate_url (~> 1.0.2)
   web-console (>= 3.3.0)
 

@@ -22,18 +22,18 @@ function toggle_job_customization(){
 }
 
 function addLeaf(receiver, event, data){
-  let item = data.item[0];
-  let item_id = $(item).data('id');
-  let step_id = $(event.target).data('step');
-  let atom_id = $(item).data('id');
-  let item_template = $(data.item[0]).find(".template li");  
-  let rule_info = { step_id: step_id, atom_id: atom_id, order: data.item.index() };
+  var item = data.item[0];
+  var item_id = $(item).data('id');
+  var step_id = $(event.target).data('step');
+  var atom_id = $(item).data('id');
+  var item_template = $(data.item[0]).find(".template li");  
+  var rule_info = { step_id: step_id, atom_id: atom_id, order: data.item.index() };
 
   if (item.parentNode.parentElement.dataset.id !== undefined){
     rule_info['parent_id'] = item.parentNode.parentElement.dataset.id;
   }
 
-  let post_data = {rule: rule_info}
+  var post_data = {rule: rule_info}
 
   $(item_template).clone().addClass('added').appendTo(receiver);
 
@@ -54,15 +54,15 @@ function addLeaf(receiver, event, data){
   });
 }
 function updateLeaf(rule){
-  let item = $(rule).parents('.selected-rule');
-  let item_id = $(item).data('id');
-  let item_name = $(rule).attr('name');
+  var item = $(rule).parents('.selected-rule');
+  var item_id = $(item).data('id');
+  var item_name = $(rule).attr('name');
 
-  let rule_info = {};
+  var rule_info = {};
   if (item_name !== undefined){
     rule_info[item_name] = $(rule).val();
   }
-  let post_data = {rule: rule_info};
+  var post_data = {rule: rule_info};
 
   var request = $.ajax({
     url: "/rules/" + item_id,
@@ -76,10 +76,10 @@ function updateLeaf(rule){
 }
 
 function moveLeaf(event, data){
-  let item = data.item[0];
-  let item_id = $(item).data('id');
-  let order = $(item).data('id');
-  let post_data = {rule: {parent_id: item.parentNode.parentElement.dataset.id || 0, order: data.item.index()}};
+  var item = data.item[0];
+  var item_id = $(item).data('id');
+  var order = $(item).data('id');
+  var post_data = {rule: {parent_id: item.parentNode.parentElement.dataset.id || 0, order: data.item.index()}};
 
   var request = $.ajax({
     url: "/rules/" + item_id + "/move",
@@ -93,8 +93,8 @@ function moveLeaf(event, data){
 }
 
 function removeLeaf(rule){
-  let item = $(rule).closest('.selected-rule');
-  let item_id = $(item).data('id');
+  var item = $(rule).closest('.selected-rule');
+  var item_id = $(item).data('id');
 
   var request = $.ajax({
     url: "/rules/" + item_id,
@@ -111,15 +111,15 @@ function removeLeaf(rule){
 }
 
 function toggleLeaf(rule){
-  let item = $(rule).closest('.selected-rule');
-  let item_id = $(item).data('id');
+  var item = $(rule).closest('.selected-rule');
+  var item_id = $(item).data('id');
 
   $(item).find("[name=toggle]").val($(item).find("[name=toggle]").val() == "false" ? true : false);
 
   $(rule).find("i").toggleClass("fa-eye-slash").toggleClass("fa-eye");
   $(item).toggleClass("disabled-rule");
 
-  let post_data = {rule: {"enabled": $(item).find("[name=toggle]").val() }};
+  var post_data = {rule: {"enabled": $(item).find("[name=toggle]").val() }};
 
   var request = $.ajax({
     url: "/rules/" + item_id,
