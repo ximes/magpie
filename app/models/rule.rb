@@ -7,6 +7,7 @@ class Rule < ApplicationRecord
   belongs_to :atom, foreign_key: "atom_id"
 
   scope :first_children, -> { where(parent_id: nil) }
+  scope :enabled, -> { where(enabled: true) }
 
   store :options, coder: JSON
 
