@@ -6,6 +6,7 @@ FactoryGirl.define do
 
     factory :valid_job do
       url "http://www.google.com"
+      enabled true
 
       factory :valid_job_with_rules do
         transient do

@@ -125,14 +125,15 @@
             <% if @job.results %>
               <table class="table table-condensed">
                 <tr>
-                  <td>Created at</td>
                   <td>Result</td>
+                  <td>Date</td>
+                  <td>Status</td>
                 </tr>
-                <% @job.results.reverse.each do |version| %>
-                <% result = version.reify %>
+                <% @job.results.each do |result| %>
                 <tr>
-                  <td><%= result.updated_at %></td>
                   <td><%= result.result %></td>
+                  <td><%= result.updated_at.to_s(:db) %></td>
+                  <td><%= result.status %></td>
                 </tr>
                 <% end %>
               </table>
@@ -146,5 +147,7 @@
   </div>
 <% end %>
 
-<%= button_to 'Perform', perform_job_path, class: 'btn btn-primary pull-right' %>
-<%= button_to 'Preview', perform_preview_job_path, remote: true, class: 'btn btn-primary pull-right preview-button' %>
+<% unless @job.new_record? %>
+  <%= button_to 'Perform', perform_job_path, class: 'btn btn-primary pull-right' %>
+  <%= button_to 'Preview', perform_preview_job_path, remote: true, class: 'btn btn-primary pull-right preview-button' %>
+<% end %>

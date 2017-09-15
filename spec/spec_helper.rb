@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "simplecov"
+require "paper_trail/frameworks/rspec"
+
 SimpleCov.start
 
 RSpec.configure do |config|

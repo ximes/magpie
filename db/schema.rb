@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20170805200334) do
   create_table "results", force: :cascade do |t|
     t.bigint "job_id"
     t.text "result"
+    t.text "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["job_id"], name: "index_results_on_job_id"

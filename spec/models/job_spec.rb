@@ -85,6 +85,33 @@ RSpec.describe Job, type: :model  do
 
       expect(save_count).to eq(8)
     end
+
+    with_versioning do
+      let!(:results_count) do
+        subject.create_result(result: "Result", status: Jobs::Status::Failed.new.to_s)
+        subject.results.length
+      end
+
+      it "saves a new result" do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
+          b.result_contents << "Updated Result"
+          b.result_status = Jobs::Status::Successful.new.to_s
+        end
+        subject.perform!
+        expect(subject.results.length).to eq(results_count + 1)
+      end
+
+      xit "have result and status" do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
+          b.result_contents << "Updated Result"
+          b.result_status = Jobs::Status::Successful.new.to_s
+        end
+        subject.perform!
+
+        expect(subject.result.versions.last.reify.status).to eq("Successful")
+        expect(subject.results.last.reify.result).to eq("Updated Result")
+      end
+    end
   end
   # xit 'has a notification_channel' TODO
   # xit 'has a base_url_type (protected, unprotected)'

@@ -14,10 +14,9 @@ class Job < ApplicationRecord
 
   attr_accessor :result_contents
   attr_accessor :result_status
-  attr_accessor :context
 
   def results
-    result.versions
+    result ? last_result_and_versions : []
   end
 
   def configuration
@@ -32,22 +31,28 @@ class Job < ApplicationRecord
     return unless enabled || preview
 
     @result_contents = []
+    @result_status = ""
+
     steps.each do |step|
       step.rules.enabled.each do |rule|
         children_rules(rule)
       end
     end
 
-    result_options = { result: result_contents.join, updated_at: Time.now }
+    result_options = { result: result_contents.join, updated_at: Time.now, status: result_status.to_s }
 
     unless preview
-      self.result&.update_attributes(result_options) || self.build_result(result_options)
+      self.result&.update_attributes(result_options) || self.create_result!(result_options)
     end
 
     result_options
   end
 
   private
+
+    def last_result_and_versions
+      ([result] + result.versions.map { |v| v.reify }).compact
+    end
 
     def children_rules(item, context = nil)
       context = child_execute(item, context)
