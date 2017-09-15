@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :perform, :perform_preview]
   before_action :set_atoms, only: [:edit, :new]
 
   # GET /jobs
@@ -55,6 +55,21 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: "Job was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def perform
+    @job.perform!
+    respond_to do |format|
+      format.html { redirect_to edit_job_path(@job), notice: "Job was successfully performed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def perform_preview
+    result = @job.perform
+    respond_to do |format|
+      format.html { render json: { result: result[:result], date: result[:updated_at].to_s(:db) }, status: :ok }
     end
   end
 

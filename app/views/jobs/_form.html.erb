@@ -3,7 +3,8 @@
   <div class="" role="tabpanel" data-example-id="togglable-tabs"> 
     <ul id="job-details" class="nav nav-tabs bar_tabs" role="tablist">
       <li role="presentation" class="<%= "active" if @job.new_record? %>"><a href="#tab_content1" id="settings-tab" role="tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? true : false %>">Settings</a></li>
-      <li role="presentation" class="<%= "active" unless @job.new_record? %>"><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? false : true %>">Rules</a></li>
+      <li role="presentation" class="<%= "active" unless @job.new_record? %>"><a href="#tab_content2" role="tab" id="rules-tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? false : true %>">Rules</a></li>
+      <li role="presentation"><a href="#tab_content3" role="tab" id="results-tab" data-toggle="tab" aria-expanded="false">Results</a></li>
     </ul>
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane fade <%= "active in" if @job.new_record? %>" id="tab_content1" aria-labelledby="settings-tab">
@@ -98,10 +99,52 @@
             </div>
           </div>
         </div>
+        <div class="col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Preview</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="preview">
+                <div class="spinner"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+                <%= javascript_include_tag 'job_preview.js', defer: 'defer' %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="results-tab">
+        <div class="col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Results</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            <% if @job.results %>
+              <table class="table table-condensed">
+                <tr>
+                  <td>Created at</td>
+                  <td>Result</td>
+                </tr>
+                <% @job.results.reverse.each do |version| %>
+                <% result = version.reify %>
+                <tr>
+                  <td><%= result.updated_at %></td>
+                  <td><%= result.result %></td>
+                </tr>
+                <% end %>
+              </table>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= f.button :submit, class: 'btn btn-primary pull-right' %>
     </div>
-    <%= f.button :submit, class: 'btn btn-primary pull-right' %>
   </div>
-
-
 <% end %>
+
+<%= button_to 'Perform', perform_job_path, class: 'btn btn-primary pull-right' %>
+<%= button_to 'Preview', perform_preview_job_path, remote: true, class: 'btn btn-primary pull-right preview-button' %>

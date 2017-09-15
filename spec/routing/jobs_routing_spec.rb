@@ -35,5 +35,12 @@ RSpec.describe JobsController, type: :routing do
       expect(delete: "/jobs/1").to route_to("jobs#destroy", id: "1")
     end
 
+    it "routes to #perform" do
+      expect(post: "/jobs/1/perform").to route_to("jobs#perform", id: "1")
+    end
+
+    it "routes to #perform_preview" do
+      expect(post: "/jobs/1/perform_preview").to route_to("jobs#perform_preview", id: "1")
+    end
   end
 end
