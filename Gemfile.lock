@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:ximes/recurring_select.git
+  remote: git://github.com/ximes/recurring_select.git
   revision: 08d08c0cd0fd792f4251d31dc90c1f449b83d712
   branch: rails-5
   specs:
@@ -101,7 +101,6 @@ GEM
       railties (> 3.1)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
-    cliver (0.3.2)
     cocoon (1.2.10)
     coderay (1.1.2)
     coercible (1.0.0)
@@ -252,10 +251,6 @@ GEM
     parsley-rails (2.7.0.0)
       railties (>= 3.0.0)
     pg (0.21.0)
-    poltergeist (1.16.0)
-      capybara (~> 2.1)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -391,6 +386,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webdrivers (3.2.1)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (~> 3.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -423,7 +422,6 @@ DEPENDENCIES
   omniauth-facebook (~> 4.0.0)
   paper_trail
   pg (~> 0.21.0)
-  poltergeist
   puma (~> 3.7)
   rails (~> 5.1.2)
   rails-assets-growl
@@ -442,6 +440,7 @@ DEPENDENCIES
   uglifier
   validate_url (~> 1.0.2)
   web-console (>= 3.3.0)
+  webdrivers (~> 3.0)
 
 RUBY VERSION
    ruby 2.4.0p0

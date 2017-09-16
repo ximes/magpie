@@ -1,20 +1,25 @@
 require "selenium-webdriver"
-require "capybara/poltergeist"
 
 module Atoms::PageActions
   class Visit < Atoms::Rule
     def execute(job, rule, context)
-      Capybara.register_driver :poltergeist do |app|
-        Capybara::Poltergeist::Driver.new(
+      Capybara.register_driver :headless_chrome do |app|
+        capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+          chromeOptions: {
+            args: %w{headless disable-popup-blocking no-sandbox disable-gpu window-size=1400,900},
+            binary: ENV.fetch("GOOGLE_CHROME_BIN", nil)
+          }
+        )
+
+        Capybara::Selenium::Driver.new(
           app,
-          js_errors: false,
-          debug: false,
-          phantomjs_options: ["--load-images=no", "--web-security=true"]
+          browser: :chrome,
+          desired_capabilities: capabilities
         )
       end
       Capybara.run_server = false
-      Capybara.current_driver = Rails.env.development? ? :selenium : :poltergeist
-      Capybara.javascript_driver = Rails.env.development? ? :selenium : :poltergeist
+      Capybara.current_driver = :headless_chrome
+      Capybara.javascript_driver = :headless_chrome
       Capybara.visit job.url
       Capybara.page
     end

@@ -39,7 +39,7 @@ gem "paper_trail"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 0.21.0"
 # Web scraping
-gem "poltergeist"
+gem "selenium-webdriver"
 # Use Puma as the app server
 gem "puma", "~> 3.7"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -47,7 +47,7 @@ gem "rails", "~> 5.1.2"
 # Javascript libs
 gem "rails-assets-growl"
 # Icecube & Select UI
-gem "recurring_select", "~> 2.0.0", git: "git@github.com:ximes/recurring_select.git", branch: "rails-5"
+gem "recurring_select", "~> 2.0.0", git: "git://github.com/ximes/recurring_select.git", branch: "rails-5"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
@@ -61,7 +61,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "uglifier"
 # For url validation
 gem "validate_url", "~> 1.0.2"
-
+gem "webdrivers", "~> 3.0"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -83,8 +83,6 @@ group :development do
   gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
-  # Web scraping
-  gem "selenium-webdriver"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
