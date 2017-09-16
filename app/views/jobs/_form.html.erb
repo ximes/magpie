@@ -35,12 +35,12 @@
                 <%= f.label :start_date %>
                 <div class="input-group">
                   <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> 
-                  <%= f.input :start_date, label: false %>
+                  <%= f.input :start_date, as: :date, html5: true, label: false, input_html: {class: "datepicker"} %>
                 </div>
                 <%= f.label :end_date %>
                 <div class="input-group">
                   <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> 
-                  <%= f.input :end_date, label: false %>
+                  <%= f.input :end_date, as: :date, html5: true, label: false, input_html: {class: "datepicker"} %>
                 </div>
               </div>
             </div>
@@ -60,6 +60,20 @@
                   <%= render 'shared/configuration_fields', f: configuration %>
                 <% end %>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2><i class="fa fa-bars"></i> Schedule</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <%= f.fields_for :schedulers do |scheduler| %>
+                <%= render "scheduler_fields", f: scheduler %>
+              <% end %>
+              <%= link_to_add_association t("add scheduler"), f, :schedulers, class: "btn btn-info" %>
             </div>
           </div>
         </div>
@@ -159,3 +173,4 @@
   <%= button_to 'Perform', perform_job_path, class: 'btn btn-primary pull-right' %>
   <%= button_to 'Preview', perform_preview_job_path, remote: true, class: 'btn btn-primary pull-right preview-button' %>
 <% end %>
+

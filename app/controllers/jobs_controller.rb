@@ -85,6 +85,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.fetch(:job, {}).permit(:name, :enabled, :start_date, :end_date, :url, :customizable, :user_id, configuration_attributes: [:id, :job_method, :track_job_results, :track_job_status, :preliminary_header_check, :job_notification, :job_notification_method])
+      params.fetch(:job, {}).permit(:name, :enabled, :start_date, :end_date, :url, :customizable, :user_id, configuration_attributes: [:id, :job_method, :track_job_results, :track_job_status, :preliminary_header_check, :job_notification, :job_notification_method], schedulers_attributes: [:id, :time, :schedule, :enabled, :_destroy])
     end
 end

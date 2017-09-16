@@ -30,9 +30,8 @@ RSpec.describe Job, type: :model  do
     it { expect(subject).to have_one(:result).dependent(:destroy) }
     it { expect(subject).to respond_to(:results) }
     it { expect(subject).to belong_to(:user) }
-    xit { expect(subject).to have_one(:status).through(:result) }
     it { expect(subject).to have_one(:configuration) }
-    # TODO test for accepts_nested_attributes_for
+    it { expect(subject).to have_many(:schedulers) }
   end
 
   describe "when it does have its own configuration" do

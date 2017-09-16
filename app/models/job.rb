@@ -5,8 +5,11 @@ class Job < ApplicationRecord
 
   has_many :steps, dependent: :destroy, class_name: "Jobs::Step", inverse_of: :job
   has_many :rules, through: :steps
+  has_many :schedulers, inverse_of: :job
 
   has_one :result, class_name: "Jobs::Result", dependent: :destroy
+
+  accepts_nested_attributes_for :schedulers, reject_if: :all_blank, allow_destroy: true
 
   include Configurable
 

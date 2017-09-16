@@ -48,6 +48,8 @@ gem "puma", "~> 3.7"
 gem "rails", "~> 5.1.2"
 # Javascript libs
 gem "rails-assets-growl"
+# Icecube & Select UI
+gem "recurring_select", "~> 2.0.0", git: "git@github.com:ximes/recurring_select.git", branch: "rails-5"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
