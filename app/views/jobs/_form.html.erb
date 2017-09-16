@@ -2,12 +2,12 @@
   <%= f.error_notification %>
   <div class="" role="tabpanel" data-example-id="togglable-tabs"> 
     <ul id="job-details" class="nav nav-tabs bar_tabs" role="tablist">
-      <li role="presentation" class="<%= "active" if @job.new_record? %>"><a href="#tab_content1" id="settings-tab" role="tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? true : false %>">Settings</a></li>
-      <li role="presentation" class="<%= "active" unless @job.new_record? %>"><a href="#tab_content2" role="tab" id="rules-tab" data-toggle="tab" aria-expanded="<%= @job.new_record? ? false : true %>">Rules</a></li>
+      <li role="presentation" class="<%= "active" if @job.new_record? || !@job.rules.any? %>"><a href="#tab_content1" id="settings-tab" role="tab" data-toggle="tab" aria-expanded="<%= @job.new_record? || !@job.rules.any? ? true : false %>">Settings</a></li>
+      <li role="presentation" class="<%= "active" if @job.persisted? && @job.rules.any? %>"><a href="#tab_content2" role="tab" id="rules-tab" data-toggle="tab" aria-expanded="<%= @job.persisted? && @job.rules.any? ? true : false %>">Rules</a></li>
       <li role="presentation"><a href="#tab_content3" role="tab" id="results-tab" data-toggle="tab" aria-expanded="false">Results</a></li>
     </ul>
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane fade <%= "active in" if @job.new_record? %>" id="tab_content1" aria-labelledby="settings-tab">
+      <div role="tabpanel" class="tab-pane fade <%= "active in" if @job.new_record? || !@job.rules.any? %>" id="tab_content1" aria-labelledby="settings-tab">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
@@ -78,7 +78,7 @@
           </div>
         </div>
       </div>
-      <div role="tabpanel" class="tab-pane fade <%= "active in" unless @job.new_record? %>" id="tab_content2" aria-labelledby="profile-tab">
+      <div role="tabpanel" class="tab-pane fade <%= "active in" if @job.persisted? && @job.rules.any? %>" id="tab_content2" aria-labelledby="profile-tab">
         <div class="col-xs-6">
           <div class="x_panel">
             <div class="x_title">
