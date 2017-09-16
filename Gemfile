@@ -23,8 +23,6 @@ gem "cocoon", "~> 1.2.10"
 gem "coffee-rails", "~> 4.2.2"
 # Authentication
 gem "devise", "~> 4.3.0"
-# Use env vars
-gem "dotenv-rails", groups: [:development, :test]
 # Font awesome
 gem "font-awesome-sass", "~> 4.7.0"
 # Template
@@ -56,6 +54,7 @@ gem "sass-rails", "~> 5.0"
 # gem 'bcrypt', '~> 3.1.7'
 # Form helpers
 gem "simple_form", "~> 3.5.0"
+gem "telegram-bot-ruby"
 gem "the_sortable_tree", "~> 2.5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
@@ -69,6 +68,8 @@ gem "validate_url", "~> 1.0.2"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  # Use env vars
+  gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5"
 end
 group :test do

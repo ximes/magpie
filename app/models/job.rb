@@ -50,9 +50,14 @@ class Job < ApplicationRecord
 
     unless preview
       self.result&.update_attributes(result_options) || self.create_result!(result_options)
+      Notifiers::Telegram.new(self.result.to_s)
     end
 
     result_options
+  end
+
+  def to_s
+    name
   end
 
   private
