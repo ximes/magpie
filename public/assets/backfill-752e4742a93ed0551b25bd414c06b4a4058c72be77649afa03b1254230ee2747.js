@@ -1,0 +1,1 @@
+jQuery.fn.load=function(n){$(window).on("load",n)};
