@@ -6,6 +6,10 @@ class Jobs::Result < ApplicationRecord
   belongs_to :job
 
   def date
-    create_at
+    created_at
+  end
+
+  def to_s
+    "Job #{job} run at #{date}, status: #{status}, result: #{result}"
   end
 end

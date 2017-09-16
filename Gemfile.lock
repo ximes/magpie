@@ -66,6 +66,10 @@ GEM
       execjs
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-daterangepicker-rails (0.0.8)
@@ -100,6 +104,8 @@ GEM
     cliver (0.3.2)
     cocoon (1.2.10)
     coderay (1.1.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -112,6 +118,8 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -124,6 +132,7 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
+    equalizer (0.0.11)
     erbse (0.1.1)
       temple
     erubi (1.6.1)
@@ -177,6 +186,7 @@ GEM
     hashie (3.5.6)
     i18n (0.8.6)
     ice_cube (0.16.2)
+    ice_nine (0.11.2)
     icheck-rails (1.0.2.2)
       jquery-rails
       rails (>= 3.1.0)
@@ -352,6 +362,9 @@ GEM
       sprockets (>= 3.0.0)
     switchery-rails (0.8.1.1)
       railties (>= 3.2, < 6.0)
+    telegram-bot-ruby (0.8.3)
+      faraday
+      virtus
     temple (0.8.0)
     the_sortable_tree (2.5.0)
       rails (>= 3.1)
@@ -366,6 +379,11 @@ GEM
     validate_url (1.0.2)
       activemodel (>= 3.0.0)
       addressable
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -418,6 +436,7 @@ DEPENDENCIES
   simplecov (~> 0.15.0)
   spring
   spring-watcher-listen (~> 2.0.0)
+  telegram-bot-ruby
   the_sortable_tree (~> 2.5.0)
   tzinfo-data
   uglifier
