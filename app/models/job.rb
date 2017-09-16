@@ -19,6 +19,10 @@ class Job < ApplicationRecord
     result ? last_result_and_versions : []
   end
 
+  def status
+    result ? result.status : nil
+  end
+
   def configuration
     customizable? ? super : build_configuration(user.configuration.accessible_attributes)
   end

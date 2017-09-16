@@ -6,6 +6,7 @@ RSpec.describe Job, type: :model  do
     it { expect(subject).to validate_presence_of(:start_date) }
     it { expect(subject).to respond_to(:end_date) }
     it { expect(subject).to validate_presence_of(:url) }
+    it { expect(subject).to respond_to(:status) }
     it { expect(subject).to respond_to(:enabled?) }
 
     let (:job) { build(:job) }
