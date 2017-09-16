@@ -5,9 +5,8 @@
 //= require jquery-ui
 //= require cocoon
 //= require gentelella
-//= require gentelella-custom
 //= require jquery.mjs.nestedSortable.js
-
+//= require recurring_select
 //= require growl
 
 function toggle_job_customization(){

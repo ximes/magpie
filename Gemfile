@@ -12,6 +12,8 @@ end
 # Nested set node parsing
 gem "awesome_nested_set", "~> 3.1.3"
 gem "bootstrap-sass", "~> 3.3.6"
+# Web scraping
+gem "capybara"
 # Cells
 gem "cells-erb"
 gem "cells-rails"
@@ -34,16 +36,20 @@ gem "jquery-rails", "~> 4.3.1"
 gem "jquery-ui-rails", "~> 6.0.1"
 # Used by devise per authentication
 gem "omniauth-facebook", "~> 4.0.0"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 0.21.0"
-# Use Puma as the app server
-gem "puma", "~> 3.7"
 # Use for versioning model attributes
 gem "paper_trail"
+# Use postgresql as the database for Active Record
+gem "pg", "~> 0.21.0"
+# Web scraping
+gem "poltergeist"
+# Use Puma as the app server
+gem "puma", "~> 3.7"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.1.2"
 # Javascript libs
 gem "rails-assets-growl"
+# Icecube & Select UI
+gem "recurring_select", "~> 2.0.0", git: "git@github.com:ximes/recurring_select.git", branch: "rails-5"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
@@ -76,6 +82,8 @@ group :development do
   gem "guard-rspec", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
+  # Web scraping
+  gem "selenium-webdriver"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"

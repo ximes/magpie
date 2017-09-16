@@ -1,0 +1,19 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="input-group">
+        <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span> 
+        <%= f.select_recurring :schedule, nil, allow_blank: true %>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <%= f.input :time, as: :time, label: false %>
+    </div>
+    <div class="col-xs-2">
+      <%= f.input :enabled, as: :boolean, input_html: { class: "js-switch" } %>
+    </div>
+    <div class="col-xs-2">
+      <%= link_to_remove_association t("remove"), f, class: "btn btn-info pull-right" %>
+    </div>
+  </div>
+</div>

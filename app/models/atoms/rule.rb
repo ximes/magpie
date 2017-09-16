@@ -1,6 +1,10 @@
+require "capybara/dsl"
+
 module Atoms
   class Rule < Cell::ViewModel
     MODULE_NAME = "Atoms"
+
+    include Capybara::DSL
 
     self.view_paths = ["app/views"]
 
@@ -25,12 +29,15 @@ module Atoms
       raise "Parent Atom is not executable"
     end
 
+    def after_execute(*args)
+      nil
+    end
+
     def accessible_options
       []
     end
 
     # view/model methods
-
     def update_url
       Rails.application.routes.url_helpers.rules_path
     end

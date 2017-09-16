@@ -5,6 +5,7 @@
 @import "gentelella";
 @import "gentelella-custom";
 @import "jquery-ui";
+@import "recurring_select";
 @import "growl";
 
 .navbar-default{
@@ -38,4 +39,9 @@
   &.disabled-rule{
     opacity: 0.5; 
   }
+}
+
+select.recurring_select{
+  height: 30px;
+  width: 100%;
 }

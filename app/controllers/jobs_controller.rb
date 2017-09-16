@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :set_atoms, only: [:edit, :new]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :perform, :perform_preview]
+  before_action :set_atoms, only: [:edit, :new, :create, :update]
 
   # GET /jobs
   # GET /jobs.json
@@ -39,7 +39,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to jobs_path, notice: "Job was successfully updated." }
+        format.html { redirect_to edit_job_path(@job), notice: "Job was successfully updated." }
         format.json { render :show, status: :ok, location: jobs_path }
       else
         format.html { render :edit }
@@ -58,6 +58,21 @@ class JobsController < ApplicationController
     end
   end
 
+  def perform
+    @job.perform!
+    respond_to do |format|
+      format.html { redirect_to edit_job_path(@job), notice: "Job was successfully performed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def perform_preview
+    result = @job.perform
+    respond_to do |format|
+      format.html { render json: { result: result[:result], date: result[:updated_at].to_s(:db) }, status: :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
@@ -70,6 +85,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.fetch(:job, {}).permit(:name, :enabled, :start_date, :end_date, :url, :customizable, :user_id, configuration_attributes: [:id, :job_method, :track_job_results, :track_job_status, :preliminary_header_check, :job_notification, :job_notification_method])
+      params.fetch(:job, {}).permit(:name, :enabled, :start_date, :end_date, :url, :customizable, :user_id, configuration_attributes: [:id, :job_method, :track_job_results, :track_job_status, :preliminary_header_check, :job_notification, :job_notification_method], schedulers_attributes: [:id, :time, :schedule, :enabled, :_destroy])
     end
 end

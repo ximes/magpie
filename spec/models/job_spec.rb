@@ -6,6 +6,7 @@ RSpec.describe Job, type: :model  do
     it { expect(subject).to validate_presence_of(:start_date) }
     it { expect(subject).to respond_to(:end_date) }
     it { expect(subject).to validate_presence_of(:url) }
+    it { expect(subject).to respond_to(:status) }
     it { expect(subject).to respond_to(:enabled?) }
 
     let (:job) { build(:job) }
@@ -29,9 +30,8 @@ RSpec.describe Job, type: :model  do
     it { expect(subject).to have_one(:result).dependent(:destroy) }
     it { expect(subject).to respond_to(:results) }
     it { expect(subject).to belong_to(:user) }
-    xit { expect(subject).to have_one(:status).through(:result) }
     it { expect(subject).to have_one(:configuration) }
-    # TODO test for accepts_nested_attributes_for
+    it { expect(subject).to have_many(:schedulers) }
   end
 
   describe "when it does have its own configuration" do
@@ -74,16 +74,43 @@ RSpec.describe Job, type: :model  do
     before do
     end
 
-    it "runs through all rules" do
+    xit "runs through all rules" do
       save_count = 0
 
       allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |args|
         save_count += 1
-      end
+      end.and_call_original
 
       subject.perform
 
       expect(save_count).to eq(8)
+    end
+
+    with_versioning do
+      let!(:results_count) do
+        subject.create_result(result: "Result", status: Jobs::Status::Failed.new.to_s)
+        subject.results.length
+      end
+
+      it "saves a new result" do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
+          b.result_contents << "Updated Result"
+          b.result_status = Jobs::Status::Successful.new.to_s
+        end
+        subject.perform!
+        expect(subject.results.length).to eq(results_count + 1)
+      end
+
+      xit "have result and status" do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
+          b.result_contents << "Updated Result"
+          b.result_status = Jobs::Status::Successful.new.to_s
+        end
+        subject.perform!
+
+        expect(subject.result.versions.last.reify.status).to eq("Successful")
+        expect(subject.results.last.reify.result).to eq("Updated Result")
+      end
     end
   end
   # xit 'has a notification_channel' TODO

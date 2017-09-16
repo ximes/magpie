@@ -4,7 +4,12 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
   }
 
-  resources :jobs
+  resources :jobs do
+    member do
+      post "perform", to: "jobs#perform"
+      post "perform_preview", to: "jobs#perform_preview"
+    end
+  end
   resources :rules do
     patch "move", to: "rules#move", on: :member
   end

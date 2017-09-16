@@ -4,7 +4,9 @@ RSpec.describe Jobs::Result, type: :model  do
   describe "ActiveModel validations" do
     it { expect(subject).to validate_presence_of(:job) }
     it { expect(subject).to respond_to(:result) }
+    it { expect(subject).to respond_to(:status) }
     it { expect(subject).to respond_to(:date) }
+    it { is_expected.to be_versioned }
   end
 
   describe "ActiveModel associations" do

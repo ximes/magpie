@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :rule do
+    enabled true
     factory :rule_with_atoms do
       atom
     end
