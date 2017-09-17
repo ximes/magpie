@@ -9,6 +9,8 @@ class Job < ApplicationRecord
 
   has_one :result, class_name: "Jobs::Result", dependent: :destroy
 
+  scope :enabled, -> { where(enabled: true) }
+  
   accepts_nested_attributes_for :schedulers, reject_if: :all_blank, allow_destroy: true
 
   include Configurable
