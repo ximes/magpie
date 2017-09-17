@@ -32,6 +32,7 @@ gem "jbuilder", "~> 2.5"
 # Javascript libs
 gem "jquery-rails", "~> 4.3.1"
 gem "jquery-ui-rails", "~> 6.0.1"
+gem "newrelic_rpm"
 # Used by devise per authentication
 gem "omniauth-facebook", "~> 4.0.0"
 # Use for versioning model attributes
