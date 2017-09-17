@@ -53,6 +53,9 @@ gem "sass-rails", "~> 5.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Form helpers
+# Scheduled jobs
+gem "sidekiq", "~> 5.0.4"
+gem "sidekiq-cron", "~> 0.6.3"
 gem "simple_form", "~> 3.5.0"
 gem "telegram-bot-ruby"
 gem "the_sortable_tree", "~> 2.5.0"

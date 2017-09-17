@@ -14,4 +14,11 @@ Rails.application.routes.draw do
     patch "move", to: "rules#move", on: :member
   end
   root to: "homepage#index"
+
+  require "sidekiq/web"
+  require "sidekiq/cron/web"
+
+  authenticate :user do
+    mount Sidekiq::Web => "/sidekiq"
+  end
 end
