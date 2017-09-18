@@ -6,7 +6,9 @@ module Notifiers
       token = ENV["TG_TOKEN"]
 
       ::Telegram::Bot::Client.run(token) do |bot|
-        bot.api.send_message(chat_id: ENV["TG_USER"], text: message)
+        ENV["TG_USERS"].split(",").each do |user_id|
+          bot.api.send_message(chat_id: user_id, text: message)
+        end
       end
     end
   end
