@@ -1,5 +1,5 @@
 class JobPerformerJob < ApplicationJob
-  queue_as :default
+  queue_as :performers
 
   def perform(job)
     job.perform!

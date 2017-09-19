@@ -1,7 +1,6 @@
-# frozen_string_literal: true
+class SchedulerJob < ApplicationJob
+  queue_as :schedulers
 
-class SchedulerWorker
-  include Sidekiq::Worker
   def perform(*args)
     jobs = Scheduler.jobs_to_perform
 

@@ -10,7 +10,7 @@ class Job < ApplicationRecord
   has_one :result, class_name: "Jobs::Result", dependent: :destroy
 
   scope :enabled, -> { where(enabled: true) }
-  
+
   accepts_nested_attributes_for :schedulers, reject_if: :all_blank, allow_destroy: true
 
   include Configurable
@@ -52,7 +52,7 @@ class Job < ApplicationRecord
 
     unless preview
       self.result&.update_attributes(result_options) || self.create_result!(result_options)
-      Notifiers::Telegram.new(self.result.to_s)
+      Notifiers::Telegram.new(self.result.to_s) unless Rails.env.test? || Rails.env.development?
     end
 
     result_options
