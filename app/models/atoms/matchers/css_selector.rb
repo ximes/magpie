@@ -1,5 +1,5 @@
 module Atoms::Matchers
-  class CssSelector < Atoms::Rule
+  class CssSelector < Atoms::Base
     attr_accessor :selector
 
     def accessible_options

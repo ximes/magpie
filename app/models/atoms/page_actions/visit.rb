@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 
 module Atoms::PageActions
-  class Visit < Atoms::Rule
+  class Visit < Atoms::Base
     def execute(job, rule, context)
       Capybara.register_driver :headless_chrome do |app|
         capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(

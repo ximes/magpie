@@ -1,5 +1,5 @@
 module Atoms::Markers
-  class Successful < Atoms::Rule
+  class Successful < Atoms::Base
     def execute(job, rule, context)
       job.result_status = Jobs::Status::Successful.new
     end
