@@ -74,22 +74,50 @@ RSpec.describe Job, type: :model  do
     before do
     end
 
-    xit "runs through all rules" do
-      save_count = 0
-
-      allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |args|
-        save_count += 1
-      end.and_call_original
-
+    it "doesn't run if not enabled" do
+      subject.update_attribute(:enabled, false)
       subject.perform
 
-      expect(save_count).to eq(8)
+      expect_any_instance_of(Atoms::Test::Test).not_to receive(:execute)
+    end
+
+    xit "can be scheduled"
+    xit "can check for page updates in the last (n) amount of time"
+
+    xit "can make a unique summary of itself"
+
+    it "cycles through all rules at least once" do
+      save_count = 0
+      allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |args|
+        save_count += 1
+      end
+      subject.perform
+
+      expect(save_count).to eq(subject.rules.count)
+    end
+
+    context "raising errors" do
+      let(:error_to_raise) { "Generic error" }
+
+      before do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute).and_raise(error_to_raise)
+      end
+
+      it "catches errors with a failed job status" do
+        expect { subject.perform! }.not_to raise_error
+        expect(subject.result.result).to eq(error_to_raise)
+        expect(subject.result.result).to be_present
+        expect(subject.result.status).to eq(Jobs::Status::Failed.new.to_s)
+      end
     end
 
     with_versioning do
+      let!(:job) { create(:valid_job_with_rules) }
+      let!(:job_with_one_rule) { create(:valid_job_with_rules, step_count: 1) }
+
       let!(:results_count) do
-        subject.create_result(result: "Result", status: Jobs::Status::Failed.new.to_s)
-        subject.results.length
+        job.create_result(result: "Result", status: Jobs::Status::Failed.new.to_s)
+        job.results.length
       end
 
       it "saves a new result" do
@@ -97,33 +125,37 @@ RSpec.describe Job, type: :model  do
           b.result_contents << "Updated Result"
           b.result_status = Jobs::Status::Successful.new.to_s
         end
-        subject.perform!
-        expect(subject.results.length).to eq(results_count + 1)
+        job.perform!
+        expect(job.results.length).to eq(results_count + 1)
       end
 
-      xit "have result and status" do
+      it "have result and status" do
         allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
           b.result_contents << "Updated Result"
           b.result_status = Jobs::Status::Successful.new.to_s
         end
-        subject.perform!
 
-        expect(subject.result.versions.last.reify.status).to eq("Successful")
-        expect(subject.results.last.reify.result).to eq("Updated Result")
+        job.perform!
+
+        expect(job.results.first.status).to eq("Successful")
+        expect(job.results.first.result).to eq("Updated Result" * job.rules.count)
+      end
+
+      it "doesn't save a new result if no changes are detected" do
+        allow_any_instance_of(Atoms::Test::Test).to receive(:execute) do |a, b, c, d|
+          b.result_contents << "Result"
+          b.result_status = Jobs::Status::Successful.new.to_s
+        end
+
+        job_with_one_rule.perform!
+
+        expect(job_with_one_rule.results.length).to eq(results_count)
       end
     end
   end
+
   # xit 'has a notification_channel' TODO
   # xit 'has a base_url_type (protected, unprotected)'
   # xit 'has a auth_credentials (protected, unprotected)' TODO
-
-  xit "can be enabled or not"
-  xit "can be scheduled"
-  xit "can check for page updates base on previous version"
-  xit "can check for page updates in the last (n) amount of time"
-  xit "it can parse html"
-
-  xit "can make a unique summary of itself"
-
-  xit "has a rate failure"
+  # xit "has a rate failure"
 end

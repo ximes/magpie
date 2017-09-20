@@ -75,9 +75,13 @@ class Job < ApplicationRecord
           children_rules(rule, context)
         end
       end
+    rescue => ex
+      self.result_status = Jobs::Status::Failed.new
+      self.result_contents = [ex.message]
     ensure
       after_execute(item, context)
     end
+
     def child_execute(rule, context = nil)
       rule.atom_instance.execute(self, rule, context)
     end

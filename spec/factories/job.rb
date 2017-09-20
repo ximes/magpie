@@ -11,10 +11,15 @@ FactoryGirl.define do
       factory :valid_job_with_rules do
         transient do
           step_count 2
+          single_rule true
         end
 
         after(:create) do |job, evaluator|
-          create_list(:step_with_rules, evaluator.step_count, job: job)
+          if evaluator.single_rule
+            create_list(:step_with_rules, evaluator.step_count, job: job, rule_count: 1)
+          else
+            create_list(:step_with_rules, evaluator.step_count, job: job)
+          end
         end
       end
 
