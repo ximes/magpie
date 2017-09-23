@@ -20,3 +20,4 @@ Atom.create(name: "First Match", class_name: "Atoms::Matcher::First", enabled: t
 Atom.create(name: "Skip", class_name: "Atoms::Marker::Skip", enabled: true)
 Atom.create(name: "Last Match", class_name: "Atoms::Matcher::Last", enabled: true)
 Atom.create(name: "Nth Match", class_name: "Atoms::Matcher::Nth", enabled: true)
+Atom.create(name: "Each Match", class_name: "Atoms::Matcher::Each", enabled: true)
