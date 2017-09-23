@@ -1,5 +1,5 @@
 module Atoms::Test
-  class Test < Atoms::Rule
+  class Test < Atoms::Base
     def execute(job, rule, context)
     end
   end

@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe Atoms::Rule, type: :model do
+RSpec.describe Atoms::Base, type: :model do
   context "shared methods" do
 
     describe "when creating a new child class" do
       before do
-        module Atoms::TestModule; class TestClass < Atoms::Rule; end; end
+        module Atoms::TestModule; class TestClass < Atoms::Base; end; end
       end
 
       let (:child_class) { Atoms::TestModule::TestClass }

@@ -4,7 +4,7 @@ FactoryGirl.define do
 
     factory :step_with_rules, class: Jobs::Step do
       transient do
-        rule_count 2
+        rule_count 1
       end
 
       after(:create) do |step, evaluator|
@@ -12,7 +12,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |step, evaluator|
-        create_list(:nested_rule_with_atoms, evaluator.rule_count, step: step)
+        create_list(:nested_rule_with_atoms, evaluator.rule_count, step: step) if evaluator.rule_count > 1
       end
     end
   end

@@ -15,4 +15,17 @@ class Scheduler < ApplicationRecord
       write_attribute(:schedule, nil)
     end
   end
+
+  def self.jobs_to_perform
+    jobs = []
+    time = Time.zone.now
+
+    Scheduler.enabled.each do |scheduler|
+      # TODO job date start/end check
+      ic_schedule = IceCube::Schedule.new
+      ic_schedule.add_recurrence_rule(IceCube::Rule.from_hash(scheduler.schedule))
+      (jobs << scheduler.job) if scheduler.job.enabled? && ic_schedule.first.to_date == Date.today && scheduler.time.strftime("%H%M") == Time.now.strftime("%H%M")
+    end
+    jobs
+  end
 end
