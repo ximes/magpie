@@ -19,6 +19,10 @@ class Rule < ApplicationRecord
     atom.class_name.constantize.nestable?
   end
 
+  def iterates?
+    atom.class_name.constantize.iterates?
+  end
+
   def atom_instance
     atom.class_name.constantize.new(enabled, options)
   end

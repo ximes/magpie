@@ -138,7 +138,7 @@ RSpec.describe Job, type: :model  do
         job.perform!
 
         expect(job.results.first.status).to eq("Successful")
-        expect(job.results.first.result).to eq("Updated Result" * job.rules.count)
+        expect(job.results.first.result).to eq(job.rules.count.times.collect { "Updated Result" }.join(" - "))
       end
 
       it "doesn't save a new result if no changes are detected" do

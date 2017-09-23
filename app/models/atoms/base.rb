@@ -28,6 +28,10 @@ module Atoms
       []
     end
 
+    def self.iterates?
+      false
+    end
+
     def self.nestable?
       true
     end

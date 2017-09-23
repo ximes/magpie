@@ -70,11 +70,15 @@ class Job < ApplicationRecord
 
     def children_rules(item, context = nil)
       context = child_execute(item, context)
-      if item.children.enabled
-        item.children.enabled.each do |rule|
-          children_rules(rule, context)
+
+      if item.iterates?
+        context.each do |child_item|
+          execute_all_children(item, child_item)
         end
+      else
+        execute_all_children(item, context)
       end
+
     rescue => ex
       self.result_status = Jobs::Status::Failed.new
       Rails.logger.debug ex.backtrace.join("\n")
@@ -83,9 +87,18 @@ class Job < ApplicationRecord
       after_execute(item, context)
     end
 
+    def execute_all_children(item, context = nil)
+      if item.children.enabled
+        item.children.enabled.each do |rule|
+          children_rules(rule, context)
+        end
+      end
+    end
+
     def child_execute(rule, context = nil)
       rule.atom_instance.execute(self, rule, context)
     end
+
     def after_execute(rule, context = nil)
       rule.atom_instance.after_execute(self, rule, context)
     end
