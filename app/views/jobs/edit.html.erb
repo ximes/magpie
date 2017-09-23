@@ -5,6 +5,7 @@
 
   <div class="title_right">
     <div class="col-xs-12 form-group top_search">
+        <%= link_to 'Open url', @job.url, target: :_blank, class: "btn btn-default pull-right" if @job.url %>
         <%= link_to 'Back', jobs_path, class: "btn btn-default pull-right" %>
     </div>
   </div>

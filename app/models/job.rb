@@ -48,7 +48,7 @@ class Job < ApplicationRecord
       end
     end
 
-    result_options = { result: result_contents.join, updated_at: Time.now, status: result_status.to_s }
+    result_options = { result: result_contents.join(" - "), updated_at: Time.now, status: result_status.to_s }
 
     unless preview
       self.result&.update_attributes(result_options) || self.create_result!(result_options)
