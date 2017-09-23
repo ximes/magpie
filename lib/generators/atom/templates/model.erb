@@ -1,0 +1,13 @@
+module Atoms::<%= family_name.classify %>
+  class <%= name.classify %> < Atoms::Base
+    def accessible_options
+      []
+    end
+
+    def execute(job, rule, context)
+    end
+
+    def after_execute(job, rule, context)
+    end
+  end
+end

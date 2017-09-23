@@ -1,0 +1,13 @@
+Description:
+    This generates all empty file required for a new Atom
+
+Example:
+    rails generate atom AtomName FamilyName
+
+    This will create:
+        app/models/atoms/[family_name]/[atom_name].rb
+        app/views/atoms/[family_name]/[atom_name]/show.erb
+        spec/models/atoms/[family_name]/[atom_name]_spec.rb
+
+    This will also append the following line to db/seeds.rb:
+        Atom.create(name: [AtomName], class_name: "Atoms::[FamilyName]::[AtomName]", enabled: true)
