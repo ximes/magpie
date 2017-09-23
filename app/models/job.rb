@@ -77,6 +77,7 @@ class Job < ApplicationRecord
       end
     rescue => ex
       self.result_status = Jobs::Status::Failed.new
+      Rails.logger.debug ex.backtrace.join("\n")
       self.result_contents = [ex.message]
     ensure
       after_execute(item, context)

@@ -7,7 +7,7 @@ module Atoms::Matcher
     end
 
     def execute(job, rule, context)
-      context.all(self.selector)
+      context.all(@selector)
     end
   end
 end
