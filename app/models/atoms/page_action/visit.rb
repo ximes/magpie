@@ -18,8 +18,8 @@ module Atoms::PageAction
         )
       end
       Capybara.run_server = false
-      Capybara.current_driver = :headless_chrome
-      Capybara.javascript_driver = :headless_chrome
+      Capybara.current_driver = Rails.env.development? ? :selenium_chrome_headless : :headless_chrome
+      Capybara.javascript_driver = Rails.env.development? ? :selenium_chrome_headless : :headless_chrome
       Capybara.visit job.url
       Capybara.page
     end

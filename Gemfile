@@ -75,6 +75,7 @@ group :development, :test do
   # Use env vars
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5"
+  gem "selenium-webdriver"
 end
 group :test do
   gem "database_cleaner"
