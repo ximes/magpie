@@ -1,4 +1,4 @@
-module Atoms::Matchers
+module Atoms::Matcher
   class CssSelector < Atoms::Base
     attr_accessor :selector
 

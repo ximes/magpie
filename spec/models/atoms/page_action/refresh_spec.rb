@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Atoms::Events::Click, type: :model  do
+RSpec.describe Atoms::PageAction::Refresh, type: :model  do
   describe "when executing" do
-    xit "can click" do
+    xit "can refresh page" do
       raise TODO
     end
   end

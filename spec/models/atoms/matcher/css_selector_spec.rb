@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Atoms::Matchers::CssSelector, type: :model  do
+RSpec.describe Atoms::Matcher::CssSelector, type: :model  do
   let(:options) do
     {
       selector: ".first-selector"

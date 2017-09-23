@@ -1,4 +1,4 @@
-module Atoms::Markers
+module Atoms::Marker
   class Failed < Atoms::Base
     def execute(job, rule, context)
       job.result_status = Jobs::Status::Failed.new

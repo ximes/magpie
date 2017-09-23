@@ -24,15 +24,15 @@ module RulesHelper
 
   def class_by_atom(type)
     case type
-    when /events/i
+    when /event/i
       "blue"
-    when /matchers/i
+    when /matcher/i
       "orange"
-    when /markers/i
+    when /marker/i
       "blue-sky"
-    when /page/i
+    when /pageaction/i
       "green"
-    when /values/i
+    when /value/i
       "purple"
     when /shared/i
       "red"

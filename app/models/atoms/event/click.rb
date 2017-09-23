@@ -1,4 +1,4 @@
-module Atoms::Events
+module Atoms::Event
   class Click < Atoms::Base
     def execute(job, rule, context)
       context.click

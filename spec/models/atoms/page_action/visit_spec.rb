@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Atoms::PageActions::Visit, type: :model  do
+RSpec.describe Atoms::PageAction::Visit, type: :model  do
   describe "when executing" do
     let(:job) { create(:valid_job_with_step) }
     let(:atom) { create(:visit_atom) }

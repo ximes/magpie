@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Atoms::Values::Text, type: :model  do
+RSpec.describe Atoms::Marker::Failed, type: :model  do
   describe "when executing" do
-    xit "return its text content" do
+    xit "mark as successful" do
       raise TODO
     end
   end
