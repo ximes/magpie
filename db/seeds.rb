@@ -16,3 +16,5 @@ Atom.create(name: "Refresh", class_name: "Atoms::PageAction::Refresh", enabled: 
 Atom.create(name: "Text", class_name: "Atoms::Value::Text", enabled: true)
 Atom.create(name: "Value", class_name: "Atoms::Value::Value", enabled: true)
 Atom.create(name: "Visit", class_name: "Atoms::PageAction::Visit", enabled: true)
+Atom.create(name: "First Match", class_name: "Atoms::Matcher::First", enabled: true)
+Atom.create(name: "Skip", class_name: "Atoms::Marker::Skip", enabled: true)
