@@ -19,3 +19,4 @@ Atom.create(name: "Visit", class_name: "Atoms::PageAction::Visit", enabled: true
 Atom.create(name: "First Match", class_name: "Atoms::Matcher::First", enabled: true)
 Atom.create(name: "Skip", class_name: "Atoms::Marker::Skip", enabled: true)
 Atom.create(name: "Last Match", class_name: "Atoms::Matcher::Last", enabled: true)
+Atom.create(name: "Nth Match", class_name: "Atoms::Matcher::Nth", enabled: true)
