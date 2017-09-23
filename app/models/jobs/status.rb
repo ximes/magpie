@@ -14,4 +14,9 @@ class Jobs::Status
       "Timed out"
     end
   end
+  class Skip < Jobs::Status
+    def to_s
+      "Skip"
+    end
+  end
 end
