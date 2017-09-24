@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916073131) do
+ActiveRecord::Schema.define(version: 20170924110649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20170916073131) do
     t.bigint "configurable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "notify_job_results"
+    t.boolean "notify_job_status"
     t.index ["configurable_type", "configurable_id"], name: "index_configurations_on_configurable_type_and_configurable_id"
   end
 
