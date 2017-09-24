@@ -32,12 +32,19 @@
   clear: both;
   width: 100%;
   min-height: 50px;
-  border: 1px solid #ccc;
+  padding: 3px;
+  padding-bottom: 10px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  border: 1px solid #fff !important;
   input{
     color: #000;
   }
   &.disabled-rule{
     opacity: 0.5; 
+  }
+  .fa{
+    color: #fff;
   }
 }
 
