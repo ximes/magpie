@@ -92,7 +92,11 @@ class Job < ApplicationRecord
 
     def diff_job_results?(tracking_options)
       return true unless configuration.diff_job_results?
-      results.last.result != tracking_options[:result]
+      begin
+        results.last.result != tracking_options[:result]
+      rescue
+        true
+      end
     end
 
     def last_result_and_versions
