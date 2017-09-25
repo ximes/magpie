@@ -15,6 +15,7 @@ def default_options
     track_job_status: false,
     job_method: :realtime,
     preliminary_header_check: false,
+    diff_job_results: false,
     job_notification: false,
     job_notification_method: :log
   }

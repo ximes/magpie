@@ -3,6 +3,7 @@ class Configuration < ApplicationRecord
 
   # Track results : true | false
   attribute :track_job_results, :boolean, default: false
+  attribute :diff_job_results, :boolean, default: false
   # Track job status : true | false
   attribute :track_job_status, :boolean, default: false
   # Run methods: direct|cron/whenever|background jobs
