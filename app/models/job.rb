@@ -42,10 +42,17 @@ class Job < ApplicationRecord
     @result_contents = []
     @result_status = ""
 
-    steps.each do |step|
-      step.rules.enabled.each do |rule|
-        children_rules(rule)
+    begin
+      steps.each do |step|
+        step.rules.enabled.each do |rule|
+          children_rules(rule)
+        end
       end
+    rescue Jobs::Status::DoneError => ex
+    rescue => ex
+      self.result_status = Jobs::Status::Failed.new
+      Rails.logger.debug ex.backtrace.join("\n")
+      self.result_contents = [ex.message]
     end
 
     result_options = { result: result_contents.join(" - "), updated_at: Time.now, status: result_status.to_s }
@@ -78,11 +85,6 @@ class Job < ApplicationRecord
       else
         execute_all_children(item, context)
       end
-
-    rescue => ex
-      self.result_status = Jobs::Status::Failed.new
-      Rails.logger.debug ex.backtrace.join("\n")
-      self.result_contents = [ex.message]
     ensure
       after_execute(item, context)
     end
