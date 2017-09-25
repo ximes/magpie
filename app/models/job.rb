@@ -57,9 +57,28 @@ class Job < ApplicationRecord
 
     result_options = { result: result_contents.join(" - "), updated_at: Time.now, status: result_status.to_s }
 
-    unless preview
-      self.result&.update_attributes(result_options) || self.create_result!(result_options)
-      Notifiers::Telegram.new(self.result.to_s) unless Rails.env.test? || Rails.env.development?
+    notification_message = self.result.to_s
+
+    if configuration.track_job_results? || configuration.track_job_status?
+      tracking_options = result_options.dup
+      tracking_options.except!(:result) unless configuration.track_job_results?
+      tracking_options.except!(:status, :updated_at) unless configuration.track_job_status?
+
+      if !preview && diff_job_results?(tracking_options)
+        self.result&.update_attributes(result_options) || self.create_result!(result_options)
+      end
+    end
+
+    if configuration.job_notification? && (configuration.notify_job_results? || configuration.notify_job_status?)
+      unless preview
+        if configuration.notify_job_results?
+          notification_message += " result: #{self.result.result}"
+        end
+        if configuration.notify_job_status?
+          notification_message += " status: #{self.result.status}"
+        end
+        Notifiers::Telegram.new(notification_message) unless Rails.env.test?
+      end
     end
 
     result_options
@@ -70,6 +89,11 @@ class Job < ApplicationRecord
   end
 
   private
+
+    def diff_job_results?(tracking_options)
+      return true unless configuration.diff_job_results?
+      results.last.result != tracking_options[:result]
+    end
 
     def last_result_and_versions
       ([result] + result.versions.map { |v| v.reify }).compact

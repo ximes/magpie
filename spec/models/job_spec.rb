@@ -72,6 +72,9 @@ RSpec.describe Job, type: :model  do
   describe "when performed" do
     let(:subject) { create :valid_job_with_rules }
     before do
+      allow_any_instance_of(Configuration).to receive(:track_job_results?).and_return(true)
+      allow_any_instance_of(Configuration).to receive(:track_job_status?).and_return(true)
+      allow_any_instance_of(Configuration).to receive(:diff_job_results?).and_return(false)
     end
 
     it "doesn't run if not enabled" do

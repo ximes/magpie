@@ -14,8 +14,8 @@ class Configuration < ApplicationRecord
   attribute :job_notification, :boolean, default: false
   # status notification channel: email|tg|sms|log|web interface
   attribute :job_notification_method, default: :log
-  attribute :notify_job_results, default: :false
-  attribute :notify_job_status, default: :false
+  attribute :notify_job_results, default: false
+  attribute :notify_job_status, default: false
 
   def accessible_attributes
     attributes.symbolize_keys.except(:id, :created_at, :updated_at, :configurable_id, :configurable_type)

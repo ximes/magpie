@@ -17,7 +17,9 @@ def default_options
     preliminary_header_check: false,
     diff_job_results: false,
     job_notification: false,
-    job_notification_method: :log
+    job_notification_method: :log,
+    notify_job_results: false,
+    notify_job_status: false,
   }
 end
 

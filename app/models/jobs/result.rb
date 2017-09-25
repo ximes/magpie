@@ -10,6 +10,6 @@ class Jobs::Result < ApplicationRecord
   end
 
   def to_s
-    "Job #{job} run at #{date}, status: #{status}, result: #{result}"
+    "Job #{job} run at #{date}"
   end
 end
