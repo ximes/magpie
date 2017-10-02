@@ -22,3 +22,4 @@ Atom.create(name: "Last Match", class_name: "Atoms::Matcher::Last", enabled: tru
 Atom.create(name: "Nth Match", class_name: "Atoms::Matcher::Nth", enabled: true)
 Atom.create(name: "Each Match", class_name: "Atoms::Matcher::Each", enabled: true)
 Atom.create(name: "Image", class_name: "Atoms::Value::Image", enabled: true)
+Atom.create(name: "CurrentUrl", class_name: "Atoms::Value::CurrentUrl", enabled: true)
