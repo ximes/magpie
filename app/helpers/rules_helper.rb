@@ -36,6 +36,8 @@ module RulesHelper
       "purple"
     when /shared/i
       "red"
+    when /form/i
+      "white"
     end
   end
 end
