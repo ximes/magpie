@@ -5,5 +5,6 @@ module Atoms::Value
     rescue
       ""
     end
+    def self.nestable?; false; end
   end
 end

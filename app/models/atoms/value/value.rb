@@ -3,5 +3,6 @@ module Atoms::Value
     def execute(job, rule, context)
       job.result_contents << context.attribute("value")
     end
+    def self.nestable?; false; end
   end
 end
