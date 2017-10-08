@@ -7,7 +7,8 @@ module Atoms::Matcher
     end
 
     def execute(job, rule, context)
-      context.all(@selector)
+      elements = context.all(@selector)
+      elements.any? ? elements : nil
     end
   end
 end

@@ -103,15 +103,15 @@ class Job < ApplicationRecord
       ([result] + result.versions.map { |v| v.reify }).compact
     end
 
-    def children_rules(item, context = nil)
-      context = child_execute(item, context)
-
-      if item.iterates?
-        context.each do |child_item|
-          execute_all_children(item, child_item)
+    def children_rules(item, context = nil)     
+      if context = child_execute(item, context)
+        if item.iterates?
+          context.each do |child_item|
+            execute_all_children(item, child_item)
+          end
+        else
+          execute_all_children(item, context)
         end
-      else
-        execute_all_children(item, context)
       end
     ensure
       after_execute(item, context)
