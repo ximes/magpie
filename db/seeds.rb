@@ -27,3 +27,4 @@ Atom.create(name: "Fill Input With", class_name: "Atoms::Form::FillWith", enable
 Atom.create(name: "Click (Submit)", class_name: "Atoms::Form::Submit", enabled: true)
 Atom.create(name: "Select from dropdown", class_name: "Atoms::Form::Select", enabled: true)
 Atom.create(name: "Has Text", class_name: "Atoms::Matcher::HasText", enabled: true)
+Atom.create(name: "Custom Value", class_name: "Atoms::Value::Custom", enabled: true)
