@@ -26,3 +26,4 @@ Atom.create(name: "CurrentUrl", class_name: "Atoms::Value::CurrentUrl", enabled:
 Atom.create(name: "Fill Input With", class_name: "Atoms::Form::FillWith", enabled: true)
 Atom.create(name: "Click (Submit)", class_name: "Atoms::Form::Submit", enabled: true)
 Atom.create(name: "Select from dropdown", class_name: "Atoms::Form::Select", enabled: true)
+Atom.create(name: "Has Text", class_name: "Atoms::Matcher::HasText", enabled: true)
