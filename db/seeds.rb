@@ -24,3 +24,4 @@ Atom.create(name: "Each Match", class_name: "Atoms::Matcher::Each", enabled: tru
 Atom.create(name: "Image", class_name: "Atoms::Value::Image", enabled: true)
 Atom.create(name: "CurrentUrl", class_name: "Atoms::Value::CurrentUrl", enabled: true)
 Atom.create(name: "Fill Input With", class_name: "Atoms::Form::FillWith", enabled: true)
+Atom.create(name: "Click (Submit)", class_name: "Atoms::Form::Submit", enabled: true)
