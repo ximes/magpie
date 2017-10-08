@@ -55,7 +55,7 @@ class Job < ApplicationRecord
       self.result_contents = [ex.message]
     end
 
-    result_options = { result: result_contents.join(" - "), updated_at: Time.now, status: result_status.to_s }
+    result_options = { result: result_contents.join(" -\r\n "), updated_at: Time.now, status: result_status.to_s }
 
     notification_message = self.result.to_s
 
@@ -72,10 +72,10 @@ class Job < ApplicationRecord
     if configuration.job_notification? && (configuration.notify_job_results? || configuration.notify_job_status?)
       unless preview
         if configuration.notify_job_results?
-          notification_message += " result: #{self.result.result}"
+          notification_message += " \r\nresult: #{self.result.result}"
         end
         if configuration.notify_job_status?
-          notification_message += " status: #{self.result.status}"
+          notification_message += " \r\nstatus: #{self.result.status}"
         end
         Notifiers::Telegram.new(notification_message) unless Rails.env.test?
       end
