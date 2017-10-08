@@ -54,14 +54,17 @@ function addLeaf(receiver, event, data){
   });
 }
 function updateLeaf(rule){
-  var item = $(rule).parents('.selected-rule');
+  var item = $(rule).closest('.selected-rule');
   var item_id = $(item).data('id');
-  var item_name = $(rule).attr('name');
-
   var rule_info = {};
-  if (item_name !== undefined){
-    rule_info[item_name] = $(rule).val();
-  }
+
+  $.each($(item).find(".form-control"), function(index, el){
+    var item_name = $(el).attr('name');
+    if (item_name !== undefined){
+      rule_info[item_name] = $(el).val();  
+    }
+  });    
+  
   var post_data = {rule: rule_info};
 
   var request = $.ajax({
