@@ -130,6 +130,7 @@ class Job < ApplicationRecord
     end
 
     def after_execute(rule, context = nil)
+      sleep(2)
       rule.atom_instance.after_execute(self, rule, context)
     end
 end
