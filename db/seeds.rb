@@ -28,3 +28,4 @@ Atom.create(name: "Click (Submit)", class_name: "Atoms::Form::Submit", enabled: 
 Atom.create(name: "Select from dropdown", class_name: "Atoms::Form::Select", enabled: true)
 Atom.create(name: "Has Text", class_name: "Atoms::Matcher::HasText", enabled: true)
 Atom.create(name: "Custom Value", class_name: "Atoms::Value::Custom", enabled: true)
+Atom.create(name: "Inline Click", class_name: "Atoms::Event::ClickInline", enabled: true)
