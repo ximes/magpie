@@ -51,3 +51,5 @@ The gem is available as open source under the terms of the [MIT License](http://
   # xit 'it can scrape protected pages if authorization in provided'
   # xit 'it provides a task to run a single scraping job'
   # xit 'it provides a task to run all scraping jobs'
+
+
